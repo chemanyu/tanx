@@ -13,6 +13,12 @@ from selenium.webdriver.chrome.service import Service
 from datetime import datetime, timedelta
 import pymysql
 from collections import deque
+import pandas as pd
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
 
 CHROME_DRIVER_PATH = "/opt/homebrew/bin/chromedriver" #
 
@@ -187,7 +193,7 @@ def fetch_data():
                     continue
                 # 将 activeRatioDf 转换为百分数格式
                 for item in tanx_monitor_param_list:
-                    active_ratio_df = item.get("activeRatioDf")
+                    active_ratio_df = item.get("activeRatioDf") if item.get("activeRatioDf") not in (None, "") else "0"
                     ratio = float(active_ratio_df) * 100
                     active_ratio_df_percent = str(f"{ratio:.2f}%")
                     print(f"Processing pid: {pid}, active_ratio_df: {active_ratio_df_percent}")
@@ -233,10 +239,91 @@ scheduler_status = deque(maxlen=10)  # 存储最近十次的执行记录
 def get_scheduler_status():
     return list(scheduler_status)
 
+def query_and_export_data():
+    try:
+        # Query the database for the last 30 days of data
+        query = '''
+        SELECT ds, pid, adzone_name, qingqiupv, active_ratio_df, tanx_effect_pv, tanx_clk, dongfeng_ef
+        FROM tanx_monitor
+        WHERE ds >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+        '''
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            result = cursor.fetchall()
+
+        # Convert the result to a pandas DataFrame
+        columns = ['ds', 'pid', 'adzone_name', 'qingqiupv', 'active_ratio_df', 'tanx_effect_pv', 'tanx_clk', 'dongfeng_ef']
+        df = pd.DataFrame(result, columns=columns)
+
+        # Export the DataFrame to an Excel file
+        file_path = '/tmp/tanx_data.xlsx'
+        df.to_excel(file_path, index=False)
+        logging.info(f"Data exported to {file_path}")
+
+        # Send the Excel file via email
+        send_email(file_path)
+
+    except Exception as e:
+        logging.error(f"Error querying or exporting data: {e}")
+
+# Global variable to store email recipients
+email_recipients = ['chemanyu@admate.cn']
+
+def send_email(file_path):
+    try:
+        # Email configuration
+        sender_email = "monitor@admate.cn"
+        sender_password = "Wut49622"
+        subject = "Tanx Data Export"
+
+        # Create the email
+        msg = MIMEMultipart()
+        msg['From'] = sender_email
+        msg['To'] = ", ".join(email_recipients)
+        msg['Subject'] = subject
+
+        # Email body
+        print(f"Sending email to: {email_recipients}")
+        body = "Please find the attached Excel file containing the Tanx data for the last 30 days."
+        msg.attach(MIMEText(body, 'plain'))
+
+        # Attach the Excel file
+        with open(file_path, 'rb') as attachment:
+            part = MIMEBase('application', 'octet-stream')
+            part.set_payload(attachment.read())
+        encoders.encode_base64(part)
+        part.add_header('Content-Disposition', f'attachment; filename={file_path.split('/')[-1]}')
+        msg.attach(part)
+
+        # Send the email
+        with smtplib.SMTP('smtp.partner.outlook.cn', 587) as server:
+            server.starttls()
+            server.login(sender_email, sender_password)
+            server.sendmail(sender_email, email_recipients, msg.as_string())
+
+        logging.info(f"Email sent to {email_recipients}")
+
+    except Exception as e:
+        logging.error(f"Error sending email: {e}")
+
+@app.route('/update_email_recipients', methods=['POST'])
+def update_email_recipients():
+    global email_recipients
+    email_recipients = request.form['email_recipients'].split(',')
+    logging.info(f"Email recipients updated: {email_recipients}")
+    return "Email recipients updated successfully!"
+
+@app.route('/export_and_send', methods=['POST'])
+def export_and_send():
+    query_and_export_data()
+    return "Data exported and email sent successfully!"
+
 # Schedule the task to run every day at 12:00
 #schedule.every().day.at("16:38").do(fetch_data)
 # 新增一个定时任务，每十分钟执行一次 测试
 schedule.every(1).minutes.do(fetch_data)
+schedule.every(1).minutes.do(query_and_export_data)
+
 
 flask_thread = Thread(target=run_flask)
 flask_thread.start()
@@ -296,5 +383,6 @@ except KeyboardInterrupt:
 # def selenium_fetch_button():
 #     selenium_fetch_data()
 #     return "Selenium 抓包调用成功！"
+
 
 
