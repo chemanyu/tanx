@@ -45,8 +45,40 @@ cookie_value = 'lgc=; wk_cookie2=167f0c4d672ac968e0a93b99b0d0321b; ' \
 'Tx6yMa12ZOOnG4QJZQJDjMIY43U0jyIU8FNwKsUOEy5FgqFYcLuGIsmBZ0ejXlEekmuYM22TXk5igqFYDcE' \
 'TYFTqkS3Q1..; isg=BK-vcQqHG2EQ3B9cyDvQkHJPPsW5VAN2eHI3zME-7Z_5EMsSySbKx-JWkAAuaNvu'
 
-# Global variable to store ad slots
-ad_slots = ["mm_1902210064_2348000105_113763000348"]
+# 默认的广告位列表
+ad_slots = [
+    "mm_1902210064_2348000105_111662900182",
+    "mm_1902210064_2348000105_111663100185",
+    "mm_1902210064_2348000105_113763000348",
+    "mm_1902210064_2348000105_113765750160",
+    "mm_3447365382_2749500311_114553400117",
+    "mm_3447365382_2749500311_114552150188",
+    "mm_1861850082_2364600045_112144700173",
+    "mm_1873810155_2320450209_111384500336",
+    "mm_1873810155_2320450209_111953150429",
+    "mm_1873810155_2320450209_111953700467",
+    "mm_1861850082_2364600045_115796950045",
+    "mm_1861850082_2364600045_111952850176",
+    "mm_1861850082_2364600045_111952350174",
+    "mm_1562690005_2184850029_111650700372",
+    "mm_1562690005_2184850029_111651000378",
+    "mm_1562690005_2184850029_112164850011",
+    "mm_1562690005_2184850029_112159050469",
+    "mm_6899417631_3131950139_115762350460",
+    "mm_6899417631_3131950139_115765600056",
+    "mm_6899417631_3131950139_115768000140",
+    "mm_6899417631_3131950139_115764850334",
+    "mm_6899417631_3131950139_115840550019",
+    "mm_6899417631_3131950139_115834100467",
+    "mm_2279650033_2540650473_111838750084",
+    "mm_2279650033_2540650473_111836000276",
+    "mm_2279650033_2540650473_111835400327",
+    "mm_2279650033_2540650473_111835250296",
+    "mm_2279650033_2540650473_111835500278",
+    "mm_2279650033_2540650473_111835750274",
+    "mm_2279650033_2540650473_114534000022",
+    "mm_2279650033_2540650473_114532100161"
+]
 
 # MySQL database configuration
 DB_CONFIG = {
@@ -81,23 +113,29 @@ def insert_data(ds, pid, adzone_name, qingqiupv, active_ratio_df, tanx_effect_pv
         logging.error(f"Failed to insert data for pid {pid}: {e}")
         print(f"Failed to insert data for pid {pid}: {e}")
 
+
+@app.route('/cookie_input')
+def cookie_input_page():
+    try:
+        # 使用绝对路径加载 HTML 文件
+        html_path = '/Users/chemanyu/workspace/python/tanx/cookie_input.html'
+        with open(html_path, 'r') as file:
+            html_content = file.read()
+        # 将广告位列表插入到 <textarea> 中
+        ad_slots_text = "\n".join(ad_slots)
+        html_content = html_content.replace('<textarea id="ad_slots" name="ad_slots" rows="5" required></textarea>', f'<textarea id="ad_slots" name="ad_slots" rows="5" required>{ad_slots_text}</textarea>')
+        return html_content, 200, {'Content-Type': 'text/html'}
+    except FileNotFoundError:
+        logging.error("cookie_input.html not found")
+        return "Error: cookie_input.html not found", 404
+    
+
 @app.route('/update_cookie', methods=['POST'])
 def update_cookie():
     global cookie_value
     cookie_value = request.form['cookie']
     return "Cookie 已更新成功！"
 
-@app.route('/cookie_input')
-def cookie_input_page():
-    try:
-        return open('cookie_input.html').read(), 200, {'Content-Type': 'text/html'}
-    except FileNotFoundError:
-        logging.error("cookie_input.html not found")
-        return "Error: cookie_input.html not found", 404
-
-@app.route('/')
-def index():
-    return redirect('/cookie_input')
 
 @app.route('/update_ad_slots', methods=['POST'])
 def update_ad_slots():
@@ -141,7 +179,7 @@ def fetch_data():
                     item.get("dongfengEf")
                 )
                 logging.info(f"Stored Data for pid {pid}: {item}")
-                print(item)
+                print(f"Stored Data for pid: {pid}")
         except Exception as e:
             logging.error(f"Error processing response for pid {pid}: {e}")
             print(f"Error processing response for pid {pid}: {e}")
@@ -213,3 +251,5 @@ def selenium_fetch_data():
 def selenium_fetch_button():
     selenium_fetch_data()
     return "Selenium 抓包调用成功！"
+
+

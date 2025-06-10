@@ -47,12 +47,44 @@
         button:hover {
             background-color: #0056b3;
         }
+        .loading {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #007BFF;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
     <script>
-        async function fetchData(url) {
-            const response = await fetch(url, { method: 'POST' });
-            const data = await response.text();
-            alert(data);
+        async function fetchData(url, formId) {
+            const form = document.getElementById(formId);
+            const formData = new FormData(form);
+            const loadingElement = document.getElementById('loading');
+            loadingElement.style.display = 'block';
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.text();
+                alert(data);
+            } catch (error) {
+                alert('请求失败，请稍后重试');
+            } finally {
+                loadingElement.style.display = 'none';
+            }
         }
     </script>
 </head>
@@ -60,29 +92,31 @@
     <div class="container">
         <h1>抓包工具</h1>
 
+        <div id="loading" class="loading"></div>
+
         <!-- Update Cookie Form -->
-        <form onsubmit="fetchData('/update_cookie'); return false;">
+        <form id="update_cookie_form" onsubmit="fetchData('/update_cookie', 'update_cookie_form'); return false;">
             <label for="cookie">输入 Cookie 值：</label>
             <textarea id="cookie" name="cookie" rows="5" required></textarea>
             <button type="submit">更新 Cookie</button>
         </form>
 
         <!-- Ad Slot List Form -->
-        <form onsubmit="fetchData('/update_ad_slots'); return false;">
+        <form id="update_ad_slots_form" onsubmit="fetchData('/update_ad_slots', 'update_ad_slots_form'); return false;">
             <label for="ad_slots">输入广告位列表（回车分割）：</label>
             <textarea id="ad_slots" name="ad_slots" rows="5" required></textarea>
             <button type="submit">更新广告位列表</button>
         </form>
 
         <!-- Manual Fetch Data Form -->
-        <form onsubmit="fetchData('/fetch_data'); return false;">
+        <form id="manual_fetch_form" onsubmit="fetchData('/fetch_data', 'manual_fetch_form'); return false;">
             <button type="submit">手动抓包</button>
         </form>
 
         <!-- Selenium Fetch Data Form -->
-        <form onsubmit="fetchData('/selenium_fetch'); return false;">
+        <!-- <form onsubmit="fetchData('/selenium_fetch'); return false;">
             <button type="submit">Selenium 抓包</button>
-        </form>
+        </form> -->
     </div>
 </body>
 </html>
