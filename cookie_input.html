@@ -86,6 +86,22 @@
                 loadingElement.style.display = 'none';
             }
         }
+
+        async function updateSchedulerStatus() {
+            const response = await fetch('/scheduler_status');
+            const statusList = await response.json();
+            const statusHTML = statusList.map(record => `
+                <div>
+                    <p>执行时间: ${record.execution_time}</p>
+                    <p>状态: ${record.status}</p>
+                </div>
+            `).join('<hr>');
+            document.getElementById('scheduler_status').innerHTML = '<h2>定时任务状态</h2><p>最近十次执行情况:</p>' + statusHTML;
+        }
+
+        // 定时刷新状态
+        setInterval(updateSchedulerStatus, 5000);
+        updateSchedulerStatus();
     </script>
 </head>
 <body>
@@ -117,6 +133,12 @@
         <!-- <form onsubmit="fetchData('/selenium_fetch'); return false;">
             <button type="submit">Selenium 抓包</button>
         </form> -->
+
+        <!-- Scheduler Status Module -->
+        <div id="scheduler_status" class="container">
+            <h2>定时任务状态</h2>
+            <p>最近十次执行情况:</p>
+        </div>
     </div>
 </body>
 </html>

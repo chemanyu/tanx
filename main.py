@@ -12,6 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 from datetime import datetime, timedelta
 import pymysql
+from collections import deque
 
 CHROME_DRIVER_PATH = "/opt/homebrew/bin/chromedriver" #
 
@@ -140,52 +141,71 @@ def update_cookie():
 @app.route('/update_ad_slots', methods=['POST'])
 def update_ad_slots():
     global ad_slots
-    ad_slots = request.form['ad_slots'].split('\n')
+    # 去掉传递进来的数据中的 \r
+    ad_slots = [slot.replace('\r', '') for slot in request.form['ad_slots'].split('\n')]
+    logging.info(f"广告位列表已更新: {ad_slots}")
     return "广告位列表已更新成功！"
 
 # Execute fetch_data once at startup
 def fetch_data():
-    url = 'https://tanx.alimama.com/api/media/debug/report/getReport.htm'
-    headers = {
-        'Cookie': cookie_value,
-        'Content-Type': 'application/json'
-    }
-    # Use yesterday's date as default
-    yesterday = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
-
-    for pid in ad_slots:
-        data = {
-            "ds": yesterday,
-            "mediaClick": "1",
-            "mediaCost": "1",
-            "mediaPV": "1",
-            "pid": pid,
-            "type": "rtb"
+    status_record = {"execution_time": datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "status": "执行中"}
+    #print(f"Fetching data at {status_record['execution_time']} with cookie: {cookie_value}")
+    try:
+        url = 'https://tanx.alimama.com/api/media/debug/report/getReport.htm'
+        headers = {
+            'Cookie': cookie_value,
+            'Content-Type': 'application/json'
         }
-        #print(f"Fetching data for url:{url} pid: {pid} headers {headers} with data: {data}")
-        response = requests.post(url, headers=headers, json=data)
-        try:
-            response_data = response.json()
-            tanx_monitor_param_list = response_data.get("data", {}).get("clickMonitorParamList", [])
-            for item in tanx_monitor_param_list:
-                insert_data(
-                    item.get("ds"),
-                    item.get("pid"),
-                    item.get("adzoneName"),
-                    item.get("qingqiupv"),
-                    item.get("activeRatioDf"),
-                    item.get("tanxEffectPv"),
-                    item.get("tanxClk"),
-                    item.get("dongfengEf")
-                )
-                logging.info(f"Stored Data for pid {pid}: {item}")
-                print(f"Stored Data for pid: {pid}")
-        except Exception as e:
-            logging.error(f"Error processing response for pid {pid}: {e}")
-            print(f"Error processing response for pid {pid}: {e}")
+        # Use yesterday's date as default
+        yesterday = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
+        print(f"Fetching yesterday at {yesterday}")
+    
+        for pid in ad_slots:
+            data = {
+                "ds": yesterday,
+                "mediaClick": "1",
+                "mediaCost": "1",
+                "mediaPV": "1",
+                "pid": pid,
+                "type": "rtb"
+            }
+            response = requests.post(url, headers=headers, json=data)
+            #print(f"Fetching data for url:{url} pid: {pid} with data: {data} response data: {response}")
+            try:
+                response_data = response.json()
+                #print(f"Fetching response_data: {response_data}")
+                tanx_monitor_param_list = response_data.get("data", {}).get("clickMonitorParamList", [])
+                # 修改条件判断，检查列表是否为空
+                if len(tanx_monitor_param_list) == 0:
+                    logging.error(f"No data found for pid {pid} on {yesterday}")
+                    print(f"No data found for pid {pid} on {yesterday}")
+                    continue
+                for item in tanx_monitor_param_list:
+                    insert_data(
+                        item.get("ds"),
+                        item.get("pid"),
+                        item.get("adzoneName"),
+                        item.get("qingqiupv"),
+                        item.get("activeRatioDf"),
+                        item.get("tanxEffectPv"),
+                        item.get("tanxClk"),
+                        item.get("dongfengEf")
+                    )
+                    logging.info(f"Stored Data for pid {pid}: {item}")
+                    print(f"Stored Data for pid: {pid}")
+            except Exception as e:
+                logging.error(f"Error processing response for pid {pid}: {e}")
+                print(f"Error processing response for pid {pid}: {e}")
+        status_record["status"] = "成功"
+    except Exception as e:
+        status_record["status"] = f"失败: {e}"
+    finally:
+        # 修复 scheduler_status 的错误操作
+        # 删除错误的字典键操作
+        # scheduler_status["last_execution"] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-# Schedule the task to run every day at 12:00
-schedule.every().day.at("12:09").do(fetch_data)
+        # 确保 fetch_data 函数正确追加 status_record
+        scheduler_status.append(status_record)
 
 @app.route('/fetch_data', methods=['POST'])
 def fetch_data_button():
@@ -195,13 +215,28 @@ def fetch_data_button():
 def run_flask():
     app.run(port=5000)
 
+
+# 全局变量存储定时任务状态
+scheduler_status = deque(maxlen=10)  # 存储最近十次的执行记录
+
+@app.route('/scheduler_status', methods=['GET'])
+def get_scheduler_status():
+    return list(scheduler_status)
+
+# Schedule the task to run every day at 12:00
+schedule.every().day.at("16:38").do(fetch_data)
+# 新增一个定时任务，每十分钟执行一次 测试
+#schedule.every(1).minutes.do(fetch_data)
+
 flask_thread = Thread(target=run_flask)
 flask_thread.start()
 
+# 添加调试日志以确认定时任务是否正常运行
 try:
     print("Scheduler started. Waiting for tasks...")
     while True:
         schedule.run_pending()
+        print("Pending tasks executed.")  # 调试日志
         time.sleep(1)
 except KeyboardInterrupt:
     print("Program terminated by user.")
@@ -210,46 +245,46 @@ except KeyboardInterrupt:
 
 
 # 调用浏览器抓包，备选，不一定用
-def selenium_fetch_data():
-    # Set up the Selenium WebDriver
-    options = webdriver.ChromeOptions()
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
-    service = Service(CHROME_DRIVER_PATH)
-    driver = webdriver.Chrome(service=service, options=options)
+# def selenium_fetch_data():
+#     # Set up the Selenium WebDriver
+#     options = webdriver.ChromeOptions()
+#     options.add_argument('--headless')
+#     options.add_argument('--disable-gpu')
+#     service = Service(CHROME_DRIVER_PATH)
+#     driver = webdriver.Chrome(service=service, options=options)
     
-    try:
-        # Navigate to the target page
-        driver.get('https://tanx.alimama.com/cooperation/pages/utils/traffic_verification')
+#     try:
+#         # Navigate to the target page
+#         driver.get('https://tanx.alimama.com/cooperation/pages/utils/traffic_verification')
 
-        # Wait for the page to load and interact with elements
-        WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.ID, 'date'))  # Example element ID
-        )
+#         # Wait for the page to load and interact with elements
+#         WebDriverWait(driver, 10).until(
+#             EC.presence_of_element_located((By.ID, 'date'))  # Example element ID
+#         )
 
-        # Select fields and perform query
-        date_field = driver.find_element(By.ID, 'date')
-        date_field.send_keys('2025-06-09')  # Example date
+#         # Select fields and perform query
+#         date_field = driver.find_element(By.ID, 'date')
+#         date_field.send_keys('2025-06-09')  # Example date
 
-        query_button = driver.find_element(By.ID, 'query')  # Example button ID
-        query_button.click()
+#         query_button = driver.find_element(By.ID, 'query')  # Example button ID
+#         query_button.click()
 
-        # Wait for results to load
-        WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.CLASS_NAME, 'result'))  # Example result class
-        )
+#         # Wait for results to load
+#         WebDriverWait(driver, 10).until(
+#             EC.presence_of_element_located((By.CLASS_NAME, 'result'))  # Example result class
+#         )
 
-        # Extract and log results
-        results = driver.find_element(By.CLASS_NAME, 'result').text
-        logging.info(f"Selenium Results: {results}")
-        print(results)
+#         # Extract and log results
+#         results = driver.find_element(By.CLASS_NAME, 'result').text
+#         logging.info(f"Selenium Results: {results}")
+#         print(results)
 
-    finally:
-        driver.quit()
+#     finally:
+#         driver.quit()
 
-@app.route('/selenium_fetch', methods=['POST'])
-def selenium_fetch_button():
-    selenium_fetch_data()
-    return "Selenium 抓包调用成功！"
+# @app.route('/selenium_fetch', methods=['POST'])
+# def selenium_fetch_button():
+#     selenium_fetch_data()
+#     return "Selenium 抓包调用成功！"
 
 
