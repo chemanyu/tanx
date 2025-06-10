@@ -1,0 +1,358 @@
+2025-06-09 19:01:40,585 - Response: {'info': {'errorCode': 'E0001', 'message': '请求方法不支持', 'ok': False}}
+2025-06-09 19:01:40,614 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-09 19:01:40,614 - [33mPress CTRL+C to quit[0m
+2025-06-09 19:02:19,886 - Response: {'info': {'errorCode': 'E0001', 'message': '请求方法不支持', 'ok': False}}
+2025-06-09 19:02:19,916 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-09 19:02:19,916 - [33mPress CTRL+C to quit[0m
+2025-06-09 19:02:24,723 - 127.0.0.1 - - [09/Jun/2025 19:02:24] "[33mGET / HTTP/1.1[0m" 404 -
+2025-06-09 19:02:26,329 - 127.0.0.1 - - [09/Jun/2025 19:02:26] "[33mGET / HTTP/1.1[0m" 404 -
+2025-06-09 19:02:37,303 - 127.0.0.1 - - [09/Jun/2025 19:02:37] "[33mGET / HTTP/1.1[0m" 404 -
+2025-06-09 19:04:22,234 - Response: {'info': {'errorCode': 'E0001', 'message': '请求方法不支持', 'ok': False}}
+2025-06-09 19:04:22,258 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-09 19:04:22,259 - [33mPress CTRL+C to quit[0m
+2025-06-09 19:04:24,413 - 127.0.0.1 - - [09/Jun/2025 19:04:24] "[33mGET / HTTP/1.1[0m" 404 -
+2025-06-09 19:04:30,712 - 127.0.0.1 - - [09/Jun/2025 19:04:30] "[33mGET / HTTP/1.1[0m" 404 -
+2025-06-09 19:04:31,811 - 127.0.0.1 - - [09/Jun/2025 19:04:31] "[33mGET / HTTP/1.1[0m" 404 -
+2025-06-09 19:05:50,586 - 127.0.0.1 - - [09/Jun/2025 19:05:50] "[33mGET / HTTP/1.1[0m" 404 -
+2025-06-09 19:06:54,662 - Response: {'info': {'errorCode': 'E0001', 'message': '请求方法不支持', 'ok': False}}
+2025-06-09 19:06:54,688 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-09 19:06:54,688 - [33mPress CTRL+C to quit[0m
+2025-06-09 19:06:57,107 - 127.0.0.1 - - [09/Jun/2025 19:06:57] "[32mGET / HTTP/1.1[0m" 302 -
+2025-06-09 19:06:57,111 - 127.0.0.1 - - [09/Jun/2025 19:06:57] "GET /cookie_input HTTP/1.1" 200 -
+2025-06-09 19:08:00,608 - Program terminated by user.
+2025-06-09 19:08:03,068 - Response: {'info': {'errorCode': 'E0001', 'message': '请求方法不支持', 'ok': False}}
+2025-06-09 19:08:03,100 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-09 19:08:03,101 - [33mPress CTRL+C to quit[0m
+2025-06-09 19:08:05,078 - 127.0.0.1 - - [09/Jun/2025 19:08:05] "GET /cookie_input HTTP/1.1" 200 -
+2025-06-09 19:08:06,626 - Response: {'info': {'errorCode': 'E0001', 'message': '请求方法不支持', 'ok': False}}
+2025-06-09 19:08:06,627 - 127.0.0.1 - - [09/Jun/2025 19:08:06] "POST /fetch_data HTTP/1.1" 200 -
+2025-06-09 19:31:58,705 - 127.0.0.1 - - [09/Jun/2025 19:31:58] "GET /cookie_input HTTP/1.1" 200 -
+2025-06-09 19:32:02,258 - 127.0.0.1 - - [09/Jun/2025 19:32:02] "GET /cookie_input HTTP/1.1" 200 -
+2025-06-09 19:32:03,665 - 127.0.0.1 - - [09/Jun/2025 19:32:03] "[33mPOST /selenium_fetch HTTP/1.1[0m" 404 -
+2025-06-09 19:32:07,931 - Response: {'info': {'errorCode': 'E0001', 'message': '请求方法不支持', 'ok': False}}
+2025-06-09 19:32:07,932 - 127.0.0.1 - - [09/Jun/2025 19:32:07] "POST /fetch_data HTTP/1.1" 200 -
+2025-06-09 19:32:45,130 - 127.0.0.1 - - [09/Jun/2025 19:32:45] "[33mPOST /selenium_fetch HTTP/1.1[0m" 404 -
+2025-06-09 19:33:49,940 - Program terminated by user.
+2025-06-09 19:37:56,323 - Response: {'info': {'errorCode': 'E0001', 'message': '请求方法不支持', 'ok': False}}
+2025-06-09 19:37:56,358 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-09 19:37:56,358 - [33mPress CTRL+C to quit[0m
+2025-06-09 19:37:59,026 - 127.0.0.1 - - [09/Jun/2025 19:37:59] "[31m[1mGET /selenium_fetch HTTP/1.1[0m" 405 -
+2025-06-09 19:38:04,753 - The chromedriver version (135.0.7049.84) detected in PATH at /opt/homebrew/bin/chromedriver might not be compatible with the detected chrome version (137.0.7151.69); currently, chromedriver 137.0.7151.68 is recommended for chrome 137.*, so it is advised to delete the driver in PATH and retry
+2025-06-09 19:38:05,774 - Exception on /selenium_fetch [POST]
+Traceback (most recent call last):
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/main.py", line 107, in selenium_fetch_button
+    selenium_fetch_data()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/chemanyu/workspace/python/tanx/main.py", line 74, in selenium_fetch_data
+    driver = webdriver.Chrome(options=options)
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/chrome/webdriver.py", line 47, in __init__
+    super().__init__(
+    ~~~~~~~~~~~~~~~~^
+        browser_name=DesiredCapabilities.CHROME["browserName"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        keep_alive=keep_alive,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/chromium/webdriver.py", line 69, in __init__
+    super().__init__(command_executor=executor, options=options)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py", line 257, in __init__
+    self.start_session(capabilities)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py", line 356, in start_session
+    response = self.execute(Command.NEW_SESSION, caps)["value"]
+               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py", line 447, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/remote/errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 135
+Current browser version is 137.0.7151.69 with binary path /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+Stacktrace:
+0   chromedriver                        0x0000000100b0edec cxxbridge1$str$ptr + 2817040
+1   chromedriver                        0x0000000100b07088 cxxbridge1$str$ptr + 2784940
+2   chromedriver                        0x000000010064e8d8 cxxbridge1$string$len + 93028
+3   chromedriver                        0x0000000100686bac cxxbridge1$string$len + 323128
+4   chromedriver                        0x0000000100685d7c cxxbridge1$string$len + 319496
+5   chromedriver                        0x0000000100681d4c cxxbridge1$string$len + 303064
+6   chromedriver                        0x000000010067df54 cxxbridge1$string$len + 287200
+7   chromedriver                        0x00000001006c2b50 cxxbridge1$string$len + 568796
+8   chromedriver                        0x00000001006c23c0 cxxbridge1$string$len + 566860
+9   chromedriver                        0x0000000100689a80 cxxbridge1$string$len + 335116
+10  chromedriver                        0x0000000100ad3c74 cxxbridge1$str$ptr + 2575000
+11  chromedriver                        0x0000000100ad6f40 cxxbridge1$str$ptr + 2588004
+12  chromedriver                        0x0000000100ab39fc cxxbridge1$str$ptr + 2443296
+13  chromedriver                        0x0000000100ad77bc cxxbridge1$str$ptr + 2590176
+14  chromedriver                        0x0000000100aa4af0 cxxbridge1$str$ptr + 2382100
+15  chromedriver                        0x0000000100af79a0 cxxbridge1$str$ptr + 2721732
+16  chromedriver                        0x0000000100af7b2c cxxbridge1$str$ptr + 2722128
+17  chromedriver                        0x0000000100b06cd4 cxxbridge1$str$ptr + 2783992
+18  libsystem_pthread.dylib             0x000000018be232e4 _pthread_start + 136
+19  libsystem_pthread.dylib             0x000000018be1e0fc thread_start + 8
+
+2025-06-09 19:38:05,778 - 127.0.0.1 - - [09/Jun/2025 19:38:05] "[35m[1mPOST /selenium_fetch HTTP/1.1[0m" 500 -
+2025-06-09 19:38:08,181 - The chromedriver version (135.0.7049.84) detected in PATH at /opt/homebrew/bin/chromedriver might not be compatible with the detected chrome version (137.0.7151.69); currently, chromedriver 137.0.7151.68 is recommended for chrome 137.*, so it is advised to delete the driver in PATH and retry
+2025-06-09 19:38:12,122 - Exception on /selenium_fetch [POST]
+Traceback (most recent call last):
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/main.py", line 107, in selenium_fetch_button
+    selenium_fetch_data()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/chemanyu/workspace/python/tanx/main.py", line 74, in selenium_fetch_data
+    driver = webdriver.Chrome(options=options)
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/chrome/webdriver.py", line 47, in __init__
+    super().__init__(
+    ~~~~~~~~~~~~~~~~^
+        browser_name=DesiredCapabilities.CHROME["browserName"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        keep_alive=keep_alive,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/chromium/webdriver.py", line 69, in __init__
+    super().__init__(command_executor=executor, options=options)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py", line 257, in __init__
+    self.start_session(capabilities)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py", line 356, in start_session
+    response = self.execute(Command.NEW_SESSION, caps)["value"]
+               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py", line 447, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/remote/errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 135
+Current browser version is 137.0.7151.69 with binary path /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+Stacktrace:
+0   chromedriver                        0x000000010304edec cxxbridge1$str$ptr + 2817040
+1   chromedriver                        0x0000000103047088 cxxbridge1$str$ptr + 2784940
+2   chromedriver                        0x0000000102b8e8d8 cxxbridge1$string$len + 93028
+3   chromedriver                        0x0000000102bc6bac cxxbridge1$string$len + 323128
+4   chromedriver                        0x0000000102bc5d7c cxxbridge1$string$len + 319496
+5   chromedriver                        0x0000000102bc1d4c cxxbridge1$string$len + 303064
+6   chromedriver                        0x0000000102bbdf54 cxxbridge1$string$len + 287200
+7   chromedriver                        0x0000000102c02b50 cxxbridge1$string$len + 568796
+8   chromedriver                        0x0000000102c023c0 cxxbridge1$string$len + 566860
+9   chromedriver                        0x0000000102bc9a80 cxxbridge1$string$len + 335116
+10  chromedriver                        0x0000000103013c74 cxxbridge1$str$ptr + 2575000
+11  chromedriver                        0x0000000103016f40 cxxbridge1$str$ptr + 2588004
+12  chromedriver                        0x0000000102ff39fc cxxbridge1$str$ptr + 2443296
+13  chromedriver                        0x00000001030177bc cxxbridge1$str$ptr + 2590176
+14  chromedriver                        0x0000000102fe4af0 cxxbridge1$str$ptr + 2382100
+15  chromedriver                        0x00000001030379a0 cxxbridge1$str$ptr + 2721732
+16  chromedriver                        0x0000000103037b2c cxxbridge1$str$ptr + 2722128
+17  chromedriver                        0x0000000103046cd4 cxxbridge1$str$ptr + 2783992
+18  libsystem_pthread.dylib             0x000000018be232e4 _pthread_start + 136
+19  libsystem_pthread.dylib             0x000000018be1e0fc thread_start + 8
+
+2025-06-09 19:38:12,124 - 127.0.0.1 - - [09/Jun/2025 19:38:12] "[35m[1mPOST /selenium_fetch HTTP/1.1[0m" 500 -
+2025-06-09 19:42:39,943 - The chromedriver version (135.0.7049.84) detected in PATH at /opt/homebrew/bin/chromedriver might not be compatible with the detected chrome version (137.0.7151.69); currently, chromedriver 137.0.7151.68 is recommended for chrome 137.*, so it is advised to delete the driver in PATH and retry
+2025-06-09 19:42:40,601 - Exception on /selenium_fetch [POST]
+Traceback (most recent call last):
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/main.py", line 107, in selenium_fetch_button
+    driver.quit()
+    ~~~~~~~~~~~^^
+  File "/Users/chemanyu/workspace/python/tanx/main.py", line 74, in selenium_fetch_data
+    options = webdriver.ChromeOptions()
+             ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/chrome/webdriver.py", line 47, in __init__
+    super().__init__(
+    ~~~~~~~~~~~~~~~~^
+        browser_name=DesiredCapabilities.CHROME["browserName"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        keep_alive=keep_alive,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/chromium/webdriver.py", line 69, in __init__
+    super().__init__(command_executor=executor, options=options)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py", line 257, in __init__
+    self.start_session(capabilities)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py", line 356, in start_session
+    response = self.execute(Command.NEW_SESSION, caps)["value"]
+               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py", line 447, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/remote/errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 135
+Current browser version is 137.0.7151.69 with binary path /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+Stacktrace:
+0   chromedriver                        0x00000001009badec cxxbridge1$str$ptr + 2817040
+1   chromedriver                        0x00000001009b3088 cxxbridge1$str$ptr + 2784940
+2   chromedriver                        0x00000001004fa8d8 cxxbridge1$string$len + 93028
+3   chromedriver                        0x0000000100532bac cxxbridge1$string$len + 323128
+4   chromedriver                        0x0000000100531d7c cxxbridge1$string$len + 319496
+5   chromedriver                        0x000000010052dd4c cxxbridge1$string$len + 303064
+6   chromedriver                        0x0000000100529f54 cxxbridge1$string$len + 287200
+7   chromedriver                        0x000000010056eb50 cxxbridge1$string$len + 568796
+8   chromedriver                        0x000000010056e3c0 cxxbridge1$string$len + 566860
+9   chromedriver                        0x0000000100535a80 cxxbridge1$string$len + 335116
+10  chromedriver                        0x000000010097fc74 cxxbridge1$str$ptr + 2575000
+11  chromedriver                        0x0000000100982f40 cxxbridge1$str$ptr + 2588004
+12  chromedriver                        0x000000010095f9fc cxxbridge1$str$ptr + 2443296
+13  chromedriver                        0x00000001009837bc cxxbridge1$str$ptr + 2590176
+14  chromedriver                        0x0000000100950af0 cxxbridge1$str$ptr + 2382100
+15  chromedriver                        0x00000001009a39a0 cxxbridge1$str$ptr + 2721732
+16  chromedriver                        0x00000001009a3b2c cxxbridge1$str$ptr + 2722128
+17  chromedriver                        0x00000001009b2cd4 cxxbridge1$str$ptr + 2783992
+18  libsystem_pthread.dylib             0x000000018be232e4 _pthread_start + 136
+19  libsystem_pthread.dylib             0x000000018be1e0fc thread_start + 8
+
+2025-06-09 19:42:40,603 - 127.0.0.1 - - [09/Jun/2025 19:42:40] "[35m[1mPOST /selenium_fetch HTTP/1.1[0m" 500 -
+2025-06-09 19:42:50,703 - The chromedriver version (135.0.7049.84) detected in PATH at /opt/homebrew/bin/chromedriver might not be compatible with the detected chrome version (137.0.7151.69); currently, chromedriver 137.0.7151.68 is recommended for chrome 137.*, so it is advised to delete the driver in PATH and retry
+2025-06-09 19:42:51,152 - Exception on /selenium_fetch [POST]
+Traceback (most recent call last):
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/main.py", line 107, in selenium_fetch_button
+    driver.quit()
+    ~~~~~~~~~~~^^
+  File "/Users/chemanyu/workspace/python/tanx/main.py", line 74, in selenium_fetch_data
+    options = webdriver.ChromeOptions()
+             ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/chrome/webdriver.py", line 47, in __init__
+    super().__init__(
+    ~~~~~~~~~~~~~~~~^
+        browser_name=DesiredCapabilities.CHROME["browserName"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        keep_alive=keep_alive,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/chromium/webdriver.py", line 69, in __init__
+    super().__init__(command_executor=executor, options=options)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py", line 257, in __init__
+    self.start_session(capabilities)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py", line 356, in start_session
+    response = self.execute(Command.NEW_SESSION, caps)["value"]
+               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py", line 447, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/chemanyu/workspace/python/tanx/venv/lib/python3.13/site-packages/selenium/webdriver/remote/errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 135
+Current browser version is 137.0.7151.69 with binary path /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+Stacktrace:
+0   chromedriver                        0x00000001006c6dec cxxbridge1$str$ptr + 2817040
+1   chromedriver                        0x00000001006bf088 cxxbridge1$str$ptr + 2784940
+2   chromedriver                        0x00000001002068d8 cxxbridge1$string$len + 93028
+3   chromedriver                        0x000000010023ebac cxxbridge1$string$len + 323128
+4   chromedriver                        0x000000010023dd7c cxxbridge1$string$len + 319496
+5   chromedriver                        0x0000000100239d4c cxxbridge1$string$len + 303064
+6   chromedriver                        0x0000000100235f54 cxxbridge1$string$len + 287200
+7   chromedriver                        0x000000010027ab50 cxxbridge1$string$len + 568796
+8   chromedriver                        0x000000010027a3c0 cxxbridge1$string$len + 566860
+9   chromedriver                        0x0000000100241a80 cxxbridge1$string$len + 335116
+10  chromedriver                        0x000000010068bc74 cxxbridge1$str$ptr + 2575000
+11  chromedriver                        0x000000010068ef40 cxxbridge1$str$ptr + 2588004
+12  chromedriver                        0x000000010066b9fc cxxbridge1$str$ptr + 2443296
+13  chromedriver                        0x000000010068f7bc cxxbridge1$str$ptr + 2590176
+14  chromedriver                        0x000000010065caf0 cxxbridge1$str$ptr + 2382100
+15  chromedriver                        0x00000001006af9a0 cxxbridge1$str$ptr + 2721732
+16  chromedriver                        0x00000001006afb2c cxxbridge1$str$ptr + 2722128
+17  chromedriver                        0x00000001006becd4 cxxbridge1$str$ptr + 2783992
+18  libsystem_pthread.dylib             0x000000018be232e4 _pthread_start + 136
+19  libsystem_pthread.dylib             0x000000018be1e0fc thread_start + 8
+
+2025-06-09 19:42:51,153 - 127.0.0.1 - - [09/Jun/2025 19:42:51] "[35m[1mPOST /selenium_fetch HTTP/1.1[0m" 500 -
+2025-06-10 10:45:37,946 - 127.0.0.1 - - [10/Jun/2025 10:45:37] "[31m[1mGET /selenium_fetch HTTP/1.1[0m" 405 -
+2025-06-10 10:48:58,283 - 127.0.0.1 - - [10/Jun/2025 10:48:58] "POST /update_cookie HTTP/1.1" 200 -
+2025-06-10 11:01:31,348 - Program terminated by user.
+2025-06-10 11:01:35,060 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-10 11:01:35,060 - [33mPress CTRL+C to quit[0m
+2025-06-10 11:01:38,699 - 127.0.0.1 - - [10/Jun/2025 11:01:38] "GET /cookie_input HTTP/1.1" 200 -
+2025-06-10 11:02:18,613 - Response: {'info': {'errorCode': 'E0001', 'message': '信息: Required request body is missing: public com.alibaba.ad.nb.wto.media.web.vo.AjaxResult com.alibaba.ad.nb.wto.media.web.controller.debug.DebugSimpleController.getReport(com.alibaba.uad.wto.dto.debug.DebugSimpleReportRequestDTO), 请求ID: 2166f1bf17495245385984283e2403', 'ok': False}}
+2025-06-10 11:02:18,615 - 127.0.0.1 - - [10/Jun/2025 11:02:18] "POST /fetch_data HTTP/1.1" 200 -
+2025-06-10 11:03:28,627 - 127.0.0.1 - - [10/Jun/2025 11:03:28] "GET /cookie_input HTTP/1.1" 200 -
+2025-06-10 11:03:30,885 - Response: {'info': {'errorCode': 'E0001', 'message': '信息: Required request body is missing: public com.alibaba.ad.nb.wto.media.web.vo.AjaxResult com.alibaba.ad.nb.wto.media.web.controller.debug.DebugSimpleController.getReport(com.alibaba.uad.wto.dto.debug.DebugSimpleReportRequestDTO), 请求ID: 0bb9f2a817495246108842435e2105', 'ok': False}}
+2025-06-10 11:03:30,887 - 127.0.0.1 - - [10/Jun/2025 11:03:30] "POST /fetch_data HTTP/1.1" 200 -
+2025-06-10 11:19:39,307 - 127.0.0.1 - - [10/Jun/2025 11:19:39] "GET /cookie_input HTTP/1.1" 200 -
+2025-06-10 11:19:54,927 - Response: {'info': {'errorCode': 'E0001', 'message': '信息: Required request body is missing: public com.alibaba.ad.nb.wto.media.web.vo.AjaxResult com.alibaba.ad.nb.wto.media.web.controller.debug.DebugSimpleController.getReport(com.alibaba.uad.wto.dto.debug.DebugSimpleReportRequestDTO), 请求ID: 0bf8dcd217495255949604932e209e', 'ok': False}}
+2025-06-10 11:19:54,930 - 127.0.0.1 - - [10/Jun/2025 11:19:54] "POST /fetch_data HTTP/1.1" 200 -
+2025-06-10 11:23:00,052 - Response: {'info': {'errorCode': 'E0001', 'message': '信息: Required request body is missing: public com.alibaba.ad.nb.wto.media.web.vo.AjaxResult com.alibaba.ad.nb.wto.media.web.controller.debug.DebugSimpleController.getReport(com.alibaba.uad.wto.dto.debug.DebugSimpleReportRequestDTO), 请求ID: 2107803017495257801305998e1e01', 'ok': False}}
+2025-06-10 11:23:00,056 - 127.0.0.1 - - [10/Jun/2025 11:23:00] "POST /fetch_data HTTP/1.1" 200 -
+2025-06-10 11:23:35,809 - Program terminated by user.
+2025-06-10 11:23:38,694 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-10 11:23:38,694 - [33mPress CTRL+C to quit[0m
+2025-06-10 11:23:41,979 - 127.0.0.1 - - [10/Jun/2025 11:23:41] "GET /cookie_input HTTP/1.1" 200 -
+2025-06-10 11:23:43,622 - Response for pid mm_1902210064_2348000105_113763000348: {'data': {'clickMonitor': False, 'clickMonitorParamList': [{'activeRatio': '', 'activeRatioDf': '0.9399599778485206', 'adzoneName': '佳投_激励视频_ios', 'adzoneid': '', 'allPvRate': '0.9844784616862899', 'click': '', 'clickAaidRate': '', 'clickAidRate': '', 'clickCaidRate': '', 'clickDeviceidClickRate': '', 'clickIdfaRate': '', 'clickImeiRate': '', 'clickImeimd5Rate': '', 'clickMacRate': '', 'clickMacmd5Rate': '', 'clickMonitorAaidRate': '', 'clickMonitorAidRate': '', 'clickMonitorCaidRate': '', 'clickMonitorChargeClick': '', 'clickMonitorIdfaRate': '', 'clickMonitorImeiRate': '', 'clickMonitorIpFilterRate': '', 'clickMonitorIpRate': '', 'clickMonitorMacRate': '', 'clickMonitorMacmd5Rate': '', 'clickMonitorMd5imeiRate': '', 'clickMonitorOaidRate': '', 'clickMonitorOrgClick': '', 'clickMonitorUaFilterRate': '', 'clickMonitorUaRate': '', 'clickMonitorWithEquipmentNumber': '', 'clickMonitorWithEquipmentNumberRate': '', 'clickOaidRate': '', 'clickOneidRate': '', 'clickUaFilterRate': '', 'clickUaRate': '', 'clickWithEquipmentNumber': '', 'clickWithEquipmentNumberRate': '', 'clkFilter': '', 'clkmonitorfilter': '', 'creativeId': '', 'dealId': '', 'dfChargeClickMonitor': '', 'dfOrgClickMonitor': '', 'dongfengClk': '', 'dongfengClkMonitor': '', 'dongfengClkMonitorOriginal': '', 'dongfengCostClick': '0', 'dongfengCostPv': '0', 'dongfengEf': '29444.96', 'ds': '20250609', 'equipmentNumberIdentificationRate': '', 'idfaRate': '', 'imeiRate': '', 'imeimd5': '', 'ipClickFilterRate': '', 'ipClickRate': '', 'ipFilterRate': '0.0', 'ipRate': '1', 'isClickMonitor': False, 'macRate': '', 'macmd5Rate': '', 'monitorClickPvDeviceidRate': '', 'oaidRate': '', 'paramCheckClickMonitorResult': '', 'paramCheckClickMonitorResultMsg': '', 'paramCheckClickResult': '', 'paramCheckClickResultMsg': '', 'paramCheckPvResult': '高风险', 'paramCheckPvResultMsg': 'androidDeviceCallBackRatio:0.0,iosDeviceCallBackRatio:0.9163069863532096,aidRate:0.9844784616862899,ipRate:1.0,ipFilterRate:0.0,uaRate:0.9747694588912624,uaFilterRate:0.0 113763000348 type is IOS-phone.命中规则高风险：ipFilterRate <0.01 && (iosDeviceCallBackRatio>=0.2 || ipRate>=0.5 ||  uaFilterRate>=0.0001)', 'paramCheckResult': '', 'paramCheckResultMsg': '', 'pid': 'mm_1902210064_2348000105_113763000348', 'pv': '', 'pvAaidRate': '0.0', 'pvCaidRate': '0.9163069863532096', 'pvDeviceidRate': '', 'pvIdfaRate': '0.07782564847584414', 'pvImeiRate': '0.0', 'pvMacRate': '0.0', 'pvMd5imeiRate': '0.0', 'pvMd5macRate': '0', 'pvOaidRate': '0.0', 'pvOneidRate': '', 'pvWithEquipmentNumber': '', 'pvWithEquipmentNumberRate': '', 'qingqiupv': '129983369', 'resourceId': '', 'tanxClk': '294337', 'tanxEffectPv': '657968', 'tanxPv': '', 'uaFilterRate': '0.0', 'uaRate': '0.9747694588912624', 'wakeupCnt': ''}], 'clickParamList': [{'activeRatio': '', 'activeRatioDf': '0.9399599778485206', 'adzoneName': '佳投_激励视频_ios', 'adzoneid': '', 'allPvRate': '0.9844784616862899', 'click': '', 'clickAaidRate': '', 'clickAidRate': '', 'clickCaidRate': '', 'clickDeviceidClickRate': '', 'clickIdfaRate': '', 'clickImeiRate': '', 'clickImeimd5Rate': '', 'clickMacRate': '', 'clickMacmd5Rate': '', 'clickMonitorAaidRate': '', 'clickMonitorAidRate': '', 'clickMonitorCaidRate': '', 'clickMonitorChargeClick': '', 'clickMonitorIdfaRate': '', 'clickMonitorImeiRate': '', 'clickMonitorIpFilterRate': '', 'clickMonitorIpRate': '', 'clickMonitorMacRate': '', 'clickMonitorMacmd5Rate': '', 'clickMonitorMd5imeiRate': '', 'clickMonitorOaidRate': '', 'clickMonitorOrgClick': '', 'clickMonitorUaFilterRate': '', 'clickMonitorUaRate': '', 'clickMonitorWithEquipmentNumber': '', 'clickMonitorWithEquipmentNumberRate': '', 'clickOaidRate': '', 'clickOneidRate': '', 'clickUaFilterRate': '', 'clickUaRate': '', 'clickWithEquipmentNumber': '', 'clickWithEquipmentNumberRate': '', 'clkFilter': '', 'clkmonitorfilter': '', 'creativeId': '', 'dealId': '', 'dfChargeClickMonitor': '', 'dfOrgClickMonitor': '', 'dongfengClk': '', 'dongfengClkMonitor': '', 'dongfengClkMonitorOriginal': '', 'dongfengCostClick': '0', 'dongfengCostPv': '0', 'dongfengEf': '29444.96', 'ds': '20250609', 'equipmentNumberIdentificationRate': '', 'idfaRate': '', 'imeiRate': '', 'imeimd5': '', 'ipClickFilterRate': '', 'ipClickRate': '', 'ipFilterRate': '0.0', 'ipRate': '1', 'isClickMonitor': False, 'macRate': '', 'macmd5Rate': '', 'monitorClickPvDeviceidRate': '', 'oaidRate': '', 'paramCheckClickMonitorResult': '', 'paramCheckClickMonitorResultMsg': '', 'paramCheckClickResult': '', 'paramCheckClickResultMsg': '', 'paramCheckPvResult': '高风险', 'paramCheckPvResultMsg': 'androidDeviceCallBackRatio:0.0,iosDeviceCallBackRatio:0.9163069863532096,aidRate:0.9844784616862899,ipRate:1.0,ipFilterRate:0.0,uaRate:0.9747694588912624,uaFilterRate:0.0 113763000348 type is IOS-phone.命中规则高风险：ipFilterRate <0.01 && (iosDeviceCallBackRatio>=0.2 || ipRate>=0.5 ||  uaFilterRate>=0.0001)', 'paramCheckResult': '', 'paramCheckResultMsg': '', 'pid': 'mm_1902210064_2348000105_113763000348', 'pv': '', 'pvAaidRate': '0.0', 'pvCaidRate': '0.9163069863532096', 'pvDeviceidRate': '', 'pvIdfaRate': '0.07782564847584414', 'pvImeiRate': '0.0', 'pvMacRate': '0.0', 'pvMd5imeiRate': '0.0', 'pvMd5macRate': '0', 'pvOaidRate': '0.0', 'pvOneidRate': '', 'pvWithEquipmentNumber': '', 'pvWithEquipmentNumberRate': '', 'qingqiupv': '129983369', 'resourceId': '', 'tanxClk': '294337', 'tanxEffectPv': '657968', 'tanxPv': '', 'uaFilterRate': '0.0', 'uaRate': '0.9747694588912624', 'wakeupCnt': ''}], 'paramCheckResult': '不通过', 'pids': ['mm_1902210064_2348000105_113763000348'], 'pvParamList': [{'activeRatio': '', 'activeRatioDf': '0.9399599778485206', 'adzoneName': '佳投_激励视频_ios', 'adzoneid': '', 'allPvRate': '0.9844784616862899', 'click': '', 'clickAaidRate': '', 'clickAidRate': '', 'clickCaidRate': '', 'clickDeviceidClickRate': '', 'clickIdfaRate': '', 'clickImeiRate': '', 'clickImeimd5Rate': '', 'clickMacRate': '', 'clickMacmd5Rate': '', 'clickMonitorAaidRate': '', 'clickMonitorAidRate': '', 'clickMonitorCaidRate': '', 'clickMonitorChargeClick': '', 'clickMonitorIdfaRate': '', 'clickMonitorImeiRate': '', 'clickMonitorIpFilterRate': '', 'clickMonitorIpRate': '', 'clickMonitorMacRate': '', 'clickMonitorMacmd5Rate': '', 'clickMonitorMd5imeiRate': '', 'clickMonitorOaidRate': '', 'clickMonitorOrgClick': '', 'clickMonitorUaFilterRate': '', 'clickMonitorUaRate': '', 'clickMonitorWithEquipmentNumber': '', 'clickMonitorWithEquipmentNumberRate': '', 'clickOaidRate': '', 'clickOneidRate': '', 'clickUaFilterRate': '', 'clickUaRate': '', 'clickWithEquipmentNumber': '', 'clickWithEquipmentNumberRate': '', 'clkFilter': '', 'clkmonitorfilter': '', 'creativeId': '', 'dealId': '', 'dfChargeClickMonitor': '', 'dfOrgClickMonitor': '', 'dongfengClk': '', 'dongfengClkMonitor': '', 'dongfengClkMonitorOriginal': '', 'dongfengCostClick': '0', 'dongfengCostPv': '0', 'dongfengEf': '29444.96', 'ds': '20250609', 'equipmentNumberIdentificationRate': '', 'idfaRate': '', 'imeiRate': '', 'imeimd5': '', 'ipClickFilterRate': '', 'ipClickRate': '', 'ipFilterRate': '0.0', 'ipRate': '1', 'isClickMonitor': False, 'macRate': '', 'macmd5Rate': '', 'monitorClickPvDeviceidRate': '', 'oaidRate': '', 'paramCheckClickMonitorResult': '', 'paramCheckClickMonitorResultMsg': '', 'paramCheckClickResult': '', 'paramCheckClickResultMsg': '', 'paramCheckPvResult': '高风险', 'paramCheckPvResultMsg': 'androidDeviceCallBackRatio:0.0,iosDeviceCallBackRatio:0.9163069863532096,aidRate:0.9844784616862899,ipRate:1.0,ipFilterRate:0.0,uaRate:0.9747694588912624,uaFilterRate:0.0 113763000348 type is IOS-phone.命中规则高风险：ipFilterRate <0.01 && (iosDeviceCallBackRatio>=0.2 || ipRate>=0.5 ||  uaFilterRate>=0.0001)', 'paramCheckResult': '', 'paramCheckResultMsg': '', 'pid': 'mm_1902210064_2348000105_113763000348', 'pv': '', 'pvAaidRate': '0.0', 'pvCaidRate': '0.9163069863532096', 'pvDeviceidRate': '', 'pvIdfaRate': '0.07782564847584414', 'pvImeiRate': '0.0', 'pvMacRate': '0.0', 'pvMd5imeiRate': '0.0', 'pvMd5macRate': '0', 'pvOaidRate': '0.0', 'pvOneidRate': '', 'pvWithEquipmentNumber': '', 'pvWithEquipmentNumberRate': '', 'qingqiupv': '129983369', 'resourceId': '', 'tanxClk': '294337', 'tanxEffectPv': '657968', 'tanxPv': '', 'uaFilterRate': '0.0', 'uaRate': '0.9747694588912624', 'wakeupCnt': ''}], 'reportList': [{'activeRatio': '', 'activeRatioDf': '0.9399599778485206', 'adzoneName': '佳投_激励视频_ios', 'adzoneid': '', 'allPvRate': '0.9844784616862899', 'click': '', 'clickAaidRate': '', 'clickAidRate': '', 'clickCaidRate': '', 'clickDeviceidClickRate': '', 'clickIdfaRate': '', 'clickImeiRate': '', 'clickImeimd5Rate': '', 'clickMacRate': '', 'clickMacmd5Rate': '', 'clickMonitorAaidRate': '', 'clickMonitorAidRate': '', 'clickMonitorCaidRate': '', 'clickMonitorChargeClick': '', 'clickMonitorIdfaRate': '', 'clickMonitorImeiRate': '', 'clickMonitorIpFilterRate': '', 'clickMonitorIpRate': '', 'clickMonitorMacRate': '', 'clickMonitorMacmd5Rate': '', 'clickMonitorMd5imeiRate': '', 'clickMonitorOaidRate': '', 'clickMonitorOrgClick': '', 'clickMonitorUaFilterRate': '', 'clickMonitorUaRate': '', 'clickMonitorWithEquipmentNumber': '', 'clickMonitorWithEquipmentNumberRate': '', 'clickOaidRate': '', 'clickOneidRate': '', 'clickUaFilterRate': '', 'clickUaRate': '', 'clickWithEquipmentNumber': '', 'clickWithEquipmentNumberRate': '', 'clkFilter': '', 'clkmonitorfilter': '', 'creativeId': '', 'dealId': '', 'dfChargeClickMonitor': '', 'dfOrgClickMonitor': '', 'dongfengClk': '', 'dongfengClkMonitor': '', 'dongfengClkMonitorOriginal': '', 'dongfengCostClick': '0', 'dongfengCostPv': '0', 'dongfengEf': '29444.96', 'ds': '20250609', 'equipmentNumberIdentificationRate': '', 'idfaRate': '', 'imeiRate': '', 'imeimd5': '', 'ipClickFilterRate': '', 'ipClickRate': '', 'ipFilterRate': '0.0', 'ipRate': '1', 'isClickMonitor': False, 'macRate': '', 'macmd5Rate': '', 'monitorClickPvDeviceidRate': '', 'oaidRate': '', 'paramCheckClickMonitorResult': '', 'paramCheckClickMonitorResultMsg': '', 'paramCheckClickResult': '', 'paramCheckClickResultMsg': '', 'paramCheckPvResult': '高风险', 'paramCheckPvResultMsg': 'androidDeviceCallBackRatio:0.0,iosDeviceCallBackRatio:0.9163069863532096,aidRate:0.9844784616862899,ipRate:1.0,ipFilterRate:0.0,uaRate:0.9747694588912624,uaFilterRate:0.0 113763000348 type is IOS-phone.命中规则高风险：ipFilterRate <0.01 && (iosDeviceCallBackRatio>=0.2 || ipRate>=0.5 ||  uaFilterRate>=0.0001)', 'paramCheckResult': '', 'paramCheckResultMsg': '', 'pid': 'mm_1902210064_2348000105_113763000348', 'pv': '', 'pvAaidRate': '0.0', 'pvCaidRate': '0.9163069863532096', 'pvDeviceidRate': '', 'pvIdfaRate': '0.07782564847584414', 'pvImeiRate': '0.0', 'pvMacRate': '0.0', 'pvMd5imeiRate': '0.0', 'pvMd5macRate': '0', 'pvOaidRate': '0.0', 'pvOneidRate': '', 'pvWithEquipmentNumber': '', 'pvWithEquipmentNumberRate': '', 'qingqiupv': '129983369', 'resourceId': '', 'tanxClk': '294337', 'tanxEffectPv': '657968', 'tanxPv': '', 'uaFilterRate': '0.0', 'uaRate': '0.9747694588912624', 'wakeupCnt': ''}], 'requestId': '0bb9f2a817495258232562591e1f0d', 'resourceId': [None]}, 'info': {'errorCode': '', 'msg': '', 'ok': True}}
+2025-06-10 11:23:43,624 - 127.0.0.1 - - [10/Jun/2025 11:23:43] "POST /fetch_data HTTP/1.1" 200 -
+2025-06-10 12:00:01,027 - Response for pid mm_1902210064_2348000105_113763000348: {'data': {'clickMonitor': False, 'clickMonitorParamList': [{'activeRatio': '', 'activeRatioDf': '0.9399599778485206', 'adzoneName': '佳投_激励视频_ios', 'adzoneid': '', 'allPvRate': '0.9844784616862899', 'click': '', 'clickAaidRate': '', 'clickAidRate': '', 'clickCaidRate': '', 'clickDeviceidClickRate': '', 'clickIdfaRate': '', 'clickImeiRate': '', 'clickImeimd5Rate': '', 'clickMacRate': '', 'clickMacmd5Rate': '', 'clickMonitorAaidRate': '', 'clickMonitorAidRate': '', 'clickMonitorCaidRate': '', 'clickMonitorChargeClick': '', 'clickMonitorIdfaRate': '', 'clickMonitorImeiRate': '', 'clickMonitorIpFilterRate': '', 'clickMonitorIpRate': '', 'clickMonitorMacRate': '', 'clickMonitorMacmd5Rate': '', 'clickMonitorMd5imeiRate': '', 'clickMonitorOaidRate': '', 'clickMonitorOrgClick': '', 'clickMonitorUaFilterRate': '', 'clickMonitorUaRate': '', 'clickMonitorWithEquipmentNumber': '', 'clickMonitorWithEquipmentNumberRate': '', 'clickOaidRate': '', 'clickOneidRate': '', 'clickUaFilterRate': '', 'clickUaRate': '', 'clickWithEquipmentNumber': '', 'clickWithEquipmentNumberRate': '', 'clkFilter': '', 'clkmonitorfilter': '', 'creativeId': '', 'dealId': '', 'dfChargeClickMonitor': '', 'dfOrgClickMonitor': '', 'dongfengClk': '', 'dongfengClkMonitor': '', 'dongfengClkMonitorOriginal': '', 'dongfengCostClick': '0', 'dongfengCostPv': '0', 'dongfengEf': '29444.96', 'ds': '20250609', 'equipmentNumberIdentificationRate': '', 'idfaRate': '', 'imeiRate': '', 'imeimd5': '', 'ipClickFilterRate': '', 'ipClickRate': '', 'ipFilterRate': '0.0', 'ipRate': '1', 'isClickMonitor': False, 'macRate': '', 'macmd5Rate': '', 'monitorClickPvDeviceidRate': '', 'oaidRate': '', 'paramCheckClickMonitorResult': '', 'paramCheckClickMonitorResultMsg': '', 'paramCheckClickResult': '', 'paramCheckClickResultMsg': '', 'paramCheckPvResult': '高风险', 'paramCheckPvResultMsg': 'androidDeviceCallBackRatio:0.0,iosDeviceCallBackRatio:0.9163069863532096,aidRate:0.9844784616862899,ipRate:1.0,ipFilterRate:0.0,uaRate:0.9747694588912624,uaFilterRate:0.0 113763000348 type is IOS-phone.命中规则高风险：ipFilterRate <0.01 && (iosDeviceCallBackRatio>=0.2 || ipRate>=0.5 ||  uaFilterRate>=0.0001)', 'paramCheckResult': '', 'paramCheckResultMsg': '', 'pid': 'mm_1902210064_2348000105_113763000348', 'pv': '', 'pvAaidRate': '0.0', 'pvCaidRate': '0.9163069863532096', 'pvDeviceidRate': '', 'pvIdfaRate': '0.07782564847584414', 'pvImeiRate': '0.0', 'pvMacRate': '0.0', 'pvMd5imeiRate': '0.0', 'pvMd5macRate': '0', 'pvOaidRate': '0.0', 'pvOneidRate': '', 'pvWithEquipmentNumber': '', 'pvWithEquipmentNumberRate': '', 'qingqiupv': '129983369', 'resourceId': '', 'tanxClk': '294337', 'tanxEffectPv': '657968', 'tanxPv': '', 'uaFilterRate': '0.0', 'uaRate': '0.9747694588912624', 'wakeupCnt': ''}], 'clickParamList': [{'activeRatio': '', 'activeRatioDf': '0.9399599778485206', 'adzoneName': '佳投_激励视频_ios', 'adzoneid': '', 'allPvRate': '0.9844784616862899', 'click': '', 'clickAaidRate': '', 'clickAidRate': '', 'clickCaidRate': '', 'clickDeviceidClickRate': '', 'clickIdfaRate': '', 'clickImeiRate': '', 'clickImeimd5Rate': '', 'clickMacRate': '', 'clickMacmd5Rate': '', 'clickMonitorAaidRate': '', 'clickMonitorAidRate': '', 'clickMonitorCaidRate': '', 'clickMonitorChargeClick': '', 'clickMonitorIdfaRate': '', 'clickMonitorImeiRate': '', 'clickMonitorIpFilterRate': '', 'clickMonitorIpRate': '', 'clickMonitorMacRate': '', 'clickMonitorMacmd5Rate': '', 'clickMonitorMd5imeiRate': '', 'clickMonitorOaidRate': '', 'clickMonitorOrgClick': '', 'clickMonitorUaFilterRate': '', 'clickMonitorUaRate': '', 'clickMonitorWithEquipmentNumber': '', 'clickMonitorWithEquipmentNumberRate': '', 'clickOaidRate': '', 'clickOneidRate': '', 'clickUaFilterRate': '', 'clickUaRate': '', 'clickWithEquipmentNumber': '', 'clickWithEquipmentNumberRate': '', 'clkFilter': '', 'clkmonitorfilter': '', 'creativeId': '', 'dealId': '', 'dfChargeClickMonitor': '', 'dfOrgClickMonitor': '', 'dongfengClk': '', 'dongfengClkMonitor': '', 'dongfengClkMonitorOriginal': '', 'dongfengCostClick': '0', 'dongfengCostPv': '0', 'dongfengEf': '29444.96', 'ds': '20250609', 'equipmentNumberIdentificationRate': '', 'idfaRate': '', 'imeiRate': '', 'imeimd5': '', 'ipClickFilterRate': '', 'ipClickRate': '', 'ipFilterRate': '0.0', 'ipRate': '1', 'isClickMonitor': False, 'macRate': '', 'macmd5Rate': '', 'monitorClickPvDeviceidRate': '', 'oaidRate': '', 'paramCheckClickMonitorResult': '', 'paramCheckClickMonitorResultMsg': '', 'paramCheckClickResult': '', 'paramCheckClickResultMsg': '', 'paramCheckPvResult': '高风险', 'paramCheckPvResultMsg': 'androidDeviceCallBackRatio:0.0,iosDeviceCallBackRatio:0.9163069863532096,aidRate:0.9844784616862899,ipRate:1.0,ipFilterRate:0.0,uaRate:0.9747694588912624,uaFilterRate:0.0 113763000348 type is IOS-phone.命中规则高风险：ipFilterRate <0.01 && (iosDeviceCallBackRatio>=0.2 || ipRate>=0.5 ||  uaFilterRate>=0.0001)', 'paramCheckResult': '', 'paramCheckResultMsg': '', 'pid': 'mm_1902210064_2348000105_113763000348', 'pv': '', 'pvAaidRate': '0.0', 'pvCaidRate': '0.9163069863532096', 'pvDeviceidRate': '', 'pvIdfaRate': '0.07782564847584414', 'pvImeiRate': '0.0', 'pvMacRate': '0.0', 'pvMd5imeiRate': '0.0', 'pvMd5macRate': '0', 'pvOaidRate': '0.0', 'pvOneidRate': '', 'pvWithEquipmentNumber': '', 'pvWithEquipmentNumberRate': '', 'qingqiupv': '129983369', 'resourceId': '', 'tanxClk': '294337', 'tanxEffectPv': '657968', 'tanxPv': '', 'uaFilterRate': '0.0', 'uaRate': '0.9747694588912624', 'wakeupCnt': ''}], 'paramCheckResult': '不通过', 'pids': ['mm_1902210064_2348000105_113763000348'], 'pvParamList': [{'activeRatio': '', 'activeRatioDf': '0.9399599778485206', 'adzoneName': '佳投_激励视频_ios', 'adzoneid': '', 'allPvRate': '0.9844784616862899', 'click': '', 'clickAaidRate': '', 'clickAidRate': '', 'clickCaidRate': '', 'clickDeviceidClickRate': '', 'clickIdfaRate': '', 'clickImeiRate': '', 'clickImeimd5Rate': '', 'clickMacRate': '', 'clickMacmd5Rate': '', 'clickMonitorAaidRate': '', 'clickMonitorAidRate': '', 'clickMonitorCaidRate': '', 'clickMonitorChargeClick': '', 'clickMonitorIdfaRate': '', 'clickMonitorImeiRate': '', 'clickMonitorIpFilterRate': '', 'clickMonitorIpRate': '', 'clickMonitorMacRate': '', 'clickMonitorMacmd5Rate': '', 'clickMonitorMd5imeiRate': '', 'clickMonitorOaidRate': '', 'clickMonitorOrgClick': '', 'clickMonitorUaFilterRate': '', 'clickMonitorUaRate': '', 'clickMonitorWithEquipmentNumber': '', 'clickMonitorWithEquipmentNumberRate': '', 'clickOaidRate': '', 'clickOneidRate': '', 'clickUaFilterRate': '', 'clickUaRate': '', 'clickWithEquipmentNumber': '', 'clickWithEquipmentNumberRate': '', 'clkFilter': '', 'clkmonitorfilter': '', 'creativeId': '', 'dealId': '', 'dfChargeClickMonitor': '', 'dfOrgClickMonitor': '', 'dongfengClk': '', 'dongfengClkMonitor': '', 'dongfengClkMonitorOriginal': '', 'dongfengCostClick': '0', 'dongfengCostPv': '0', 'dongfengEf': '29444.96', 'ds': '20250609', 'equipmentNumberIdentificationRate': '', 'idfaRate': '', 'imeiRate': '', 'imeimd5': '', 'ipClickFilterRate': '', 'ipClickRate': '', 'ipFilterRate': '0.0', 'ipRate': '1', 'isClickMonitor': False, 'macRate': '', 'macmd5Rate': '', 'monitorClickPvDeviceidRate': '', 'oaidRate': '', 'paramCheckClickMonitorResult': '', 'paramCheckClickMonitorResultMsg': '', 'paramCheckClickResult': '', 'paramCheckClickResultMsg': '', 'paramCheckPvResult': '高风险', 'paramCheckPvResultMsg': 'androidDeviceCallBackRatio:0.0,iosDeviceCallBackRatio:0.9163069863532096,aidRate:0.9844784616862899,ipRate:1.0,ipFilterRate:0.0,uaRate:0.9747694588912624,uaFilterRate:0.0 113763000348 type is IOS-phone.命中规则高风险：ipFilterRate <0.01 && (iosDeviceCallBackRatio>=0.2 || ipRate>=0.5 ||  uaFilterRate>=0.0001)', 'paramCheckResult': '', 'paramCheckResultMsg': '', 'pid': 'mm_1902210064_2348000105_113763000348', 'pv': '', 'pvAaidRate': '0.0', 'pvCaidRate': '0.9163069863532096', 'pvDeviceidRate': '', 'pvIdfaRate': '0.07782564847584414', 'pvImeiRate': '0.0', 'pvMacRate': '0.0', 'pvMd5imeiRate': '0.0', 'pvMd5macRate': '0', 'pvOaidRate': '0.0', 'pvOneidRate': '', 'pvWithEquipmentNumber': '', 'pvWithEquipmentNumberRate': '', 'qingqiupv': '129983369', 'resourceId': '', 'tanxClk': '294337', 'tanxEffectPv': '657968', 'tanxPv': '', 'uaFilterRate': '0.0', 'uaRate': '0.9747694588912624', 'wakeupCnt': ''}], 'reportList': [{'activeRatio': '', 'activeRatioDf': '0.9399599778485206', 'adzoneName': '佳投_激励视频_ios', 'adzoneid': '', 'allPvRate': '0.9844784616862899', 'click': '', 'clickAaidRate': '', 'clickAidRate': '', 'clickCaidRate': '', 'clickDeviceidClickRate': '', 'clickIdfaRate': '', 'clickImeiRate': '', 'clickImeimd5Rate': '', 'clickMacRate': '', 'clickMacmd5Rate': '', 'clickMonitorAaidRate': '', 'clickMonitorAidRate': '', 'clickMonitorCaidRate': '', 'clickMonitorChargeClick': '', 'clickMonitorIdfaRate': '', 'clickMonitorImeiRate': '', 'clickMonitorIpFilterRate': '', 'clickMonitorIpRate': '', 'clickMonitorMacRate': '', 'clickMonitorMacmd5Rate': '', 'clickMonitorMd5imeiRate': '', 'clickMonitorOaidRate': '', 'clickMonitorOrgClick': '', 'clickMonitorUaFilterRate': '', 'clickMonitorUaRate': '', 'clickMonitorWithEquipmentNumber': '', 'clickMonitorWithEquipmentNumberRate': '', 'clickOaidRate': '', 'clickOneidRate': '', 'clickUaFilterRate': '', 'clickUaRate': '', 'clickWithEquipmentNumber': '', 'clickWithEquipmentNumberRate': '', 'clkFilter': '', 'clkmonitorfilter': '', 'creativeId': '', 'dealId': '', 'dfChargeClickMonitor': '', 'dfOrgClickMonitor': '', 'dongfengClk': '', 'dongfengClkMonitor': '', 'dongfengClkMonitorOriginal': '', 'dongfengCostClick': '0', 'dongfengCostPv': '0', 'dongfengEf': '29444.96', 'ds': '20250609', 'equipmentNumberIdentificationRate': '', 'idfaRate': '', 'imeiRate': '', 'imeimd5': '', 'ipClickFilterRate': '', 'ipClickRate': '', 'ipFilterRate': '0.0', 'ipRate': '1', 'isClickMonitor': False, 'macRate': '', 'macmd5Rate': '', 'monitorClickPvDeviceidRate': '', 'oaidRate': '', 'paramCheckClickMonitorResult': '', 'paramCheckClickMonitorResultMsg': '', 'paramCheckClickResult': '', 'paramCheckClickResultMsg': '', 'paramCheckPvResult': '高风险', 'paramCheckPvResultMsg': 'androidDeviceCallBackRatio:0.0,iosDeviceCallBackRatio:0.9163069863532096,aidRate:0.9844784616862899,ipRate:1.0,ipFilterRate:0.0,uaRate:0.9747694588912624,uaFilterRate:0.0 113763000348 type is IOS-phone.命中规则高风险：ipFilterRate <0.01 && (iosDeviceCallBackRatio>=0.2 || ipRate>=0.5 ||  uaFilterRate>=0.0001)', 'paramCheckResult': '', 'paramCheckResultMsg': '', 'pid': 'mm_1902210064_2348000105_113763000348', 'pv': '', 'pvAaidRate': '0.0', 'pvCaidRate': '0.9163069863532096', 'pvDeviceidRate': '', 'pvIdfaRate': '0.07782564847584414', 'pvImeiRate': '0.0', 'pvMacRate': '0.0', 'pvMd5imeiRate': '0.0', 'pvMd5macRate': '0', 'pvOaidRate': '0.0', 'pvOneidRate': '', 'pvWithEquipmentNumber': '', 'pvWithEquipmentNumberRate': '', 'qingqiupv': '129983369', 'resourceId': '', 'tanxClk': '294337', 'tanxEffectPv': '657968', 'tanxPv': '', 'uaFilterRate': '0.0', 'uaRate': '0.9747694588912624', 'wakeupCnt': ''}], 'requestId': '21673a9517495280005608402e1b3c', 'resourceId': [None]}, 'info': {'errorCode': '', 'msg': '', 'ok': True}}
+2025-06-10 12:08:29,722 - Program terminated by user.
+2025-06-10 12:08:32,030 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-10 12:08:32,030 - [33mPress CTRL+C to quit[0m
+2025-06-10 12:09:01,013 - Processed Data for pid mm_1902210064_2348000105_113763000348: {'activeRatio': '', 'activeRatioDf': '0.9399599778485206', 'adzoneName': '佳投_激励视频_ios', 'adzoneid': '', 'allPvRate': '0.9844784616862899', 'click': '', 'clickAaidRate': '', 'clickAidRate': '', 'clickCaidRate': '', 'clickDeviceidClickRate': '', 'clickIdfaRate': '', 'clickImeiRate': '', 'clickImeimd5Rate': '', 'clickMacRate': '', 'clickMacmd5Rate': '', 'clickMonitorAaidRate': '', 'clickMonitorAidRate': '', 'clickMonitorCaidRate': '', 'clickMonitorChargeClick': '', 'clickMonitorIdfaRate': '', 'clickMonitorImeiRate': '', 'clickMonitorIpFilterRate': '', 'clickMonitorIpRate': '', 'clickMonitorMacRate': '', 'clickMonitorMacmd5Rate': '', 'clickMonitorMd5imeiRate': '', 'clickMonitorOaidRate': '', 'clickMonitorOrgClick': '', 'clickMonitorUaFilterRate': '', 'clickMonitorUaRate': '', 'clickMonitorWithEquipmentNumber': '', 'clickMonitorWithEquipmentNumberRate': '', 'clickOaidRate': '', 'clickOneidRate': '', 'clickUaFilterRate': '', 'clickUaRate': '', 'clickWithEquipmentNumber': '', 'clickWithEquipmentNumberRate': '', 'clkFilter': '', 'clkmonitorfilter': '', 'creativeId': '', 'dealId': '', 'dfChargeClickMonitor': '', 'dfOrgClickMonitor': '', 'dongfengClk': '', 'dongfengClkMonitor': '', 'dongfengClkMonitorOriginal': '', 'dongfengCostClick': '0', 'dongfengCostPv': '0', 'dongfengEf': '29444.96', 'ds': '20250609', 'equipmentNumberIdentificationRate': '', 'idfaRate': '', 'imeiRate': '', 'imeimd5': '', 'ipClickFilterRate': '', 'ipClickRate': '', 'ipFilterRate': '0.0', 'ipRate': '1', 'isClickMonitor': False, 'macRate': '', 'macmd5Rate': '', 'monitorClickPvDeviceidRate': '', 'oaidRate': '', 'paramCheckClickMonitorResult': '', 'paramCheckClickMonitorResultMsg': '', 'paramCheckClickResult': '', 'paramCheckClickResultMsg': '', 'paramCheckPvResult': '高风险', 'paramCheckPvResultMsg': 'androidDeviceCallBackRatio:0.0,iosDeviceCallBackRatio:0.9163069863532096,aidRate:0.9844784616862899,ipRate:1.0,ipFilterRate:0.0,uaRate:0.9747694588912624,uaFilterRate:0.0 113763000348 type is IOS-phone.命中规则高风险：ipFilterRate <0.01 && (iosDeviceCallBackRatio>=0.2 || ipRate>=0.5 ||  uaFilterRate>=0.0001)', 'paramCheckResult': '', 'paramCheckResultMsg': '', 'pid': 'mm_1902210064_2348000105_113763000348', 'pv': '', 'pvAaidRate': '0.0', 'pvCaidRate': '0.9163069863532096', 'pvDeviceidRate': '', 'pvIdfaRate': '0.07782564847584414', 'pvImeiRate': '0.0', 'pvMacRate': '0.0', 'pvMd5imeiRate': '0.0', 'pvMd5macRate': '0', 'pvOaidRate': '0.0', 'pvOneidRate': '', 'pvWithEquipmentNumber': '', 'pvWithEquipmentNumberRate': '', 'qingqiupv': '129983369', 'resourceId': '', 'tanxClk': '294337', 'tanxEffectPv': '657968', 'tanxPv': '', 'uaFilterRate': '0.0', 'uaRate': '0.9747694588912624', 'wakeupCnt': ''}
+2025-06-10 12:21:21,700 - Program terminated by user.
+2025-06-10 12:22:42,930 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-10 12:22:42,930 - [33mPress CTRL+C to quit[0m
+2025-06-10 13:51:20,397 - 127.0.0.1 - - [10/Jun/2025 13:51:20] "GET /cookie_input HTTP/1.1" 200 -
+2025-06-10 13:51:22,517 - Error processing response for pid mm_1902210064_2348000105_113763000348: (1146, "Table 'release_atd.click_monitor' doesn't exist")
+2025-06-10 13:51:22,519 - 127.0.0.1 - - [10/Jun/2025 13:51:22] "POST /fetch_data HTTP/1.1" 200 -
+2025-06-10 13:52:35,916 - Error processing response for pid mm_1902210064_2348000105_113763000348: (1146, "Table 'release_atd.click_monitor' doesn't exist")
+2025-06-10 13:52:35,920 - 127.0.0.1 - - [10/Jun/2025 13:52:35] "POST /fetch_data HTTP/1.1" 200 -
+2025-06-10 13:53:11,245 - Program terminated by user.
+2025-06-10 13:53:15,517 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-10 13:53:15,517 - [33mPress CTRL+C to quit[0m
+2025-06-10 13:53:24,630 - 127.0.0.1 - - [10/Jun/2025 13:53:24] "GET /cookie_input HTTP/1.1" 200 -
+2025-06-10 13:53:26,462 - Stored Data for pid mm_1902210064_2348000105_113763000348: {'activeRatio': '', 'activeRatioDf': '0.9399599778485206', 'adzoneName': '佳投_激励视频_ios', 'adzoneid': '', 'allPvRate': '0.9844784616862899', 'click': '', 'clickAaidRate': '', 'clickAidRate': '', 'clickCaidRate': '', 'clickDeviceidClickRate': '', 'clickIdfaRate': '', 'clickImeiRate': '', 'clickImeimd5Rate': '', 'clickMacRate': '', 'clickMacmd5Rate': '', 'clickMonitorAaidRate': '', 'clickMonitorAidRate': '', 'clickMonitorCaidRate': '', 'clickMonitorChargeClick': '', 'clickMonitorIdfaRate': '', 'clickMonitorImeiRate': '', 'clickMonitorIpFilterRate': '', 'clickMonitorIpRate': '', 'clickMonitorMacRate': '', 'clickMonitorMacmd5Rate': '', 'clickMonitorMd5imeiRate': '', 'clickMonitorOaidRate': '', 'clickMonitorOrgClick': '', 'clickMonitorUaFilterRate': '', 'clickMonitorUaRate': '', 'clickMonitorWithEquipmentNumber': '', 'clickMonitorWithEquipmentNumberRate': '', 'clickOaidRate': '', 'clickOneidRate': '', 'clickUaFilterRate': '', 'clickUaRate': '', 'clickWithEquipmentNumber': '', 'clickWithEquipmentNumberRate': '', 'clkFilter': '', 'clkmonitorfilter': '', 'creativeId': '', 'dealId': '', 'dfChargeClickMonitor': '', 'dfOrgClickMonitor': '', 'dongfengClk': '', 'dongfengClkMonitor': '', 'dongfengClkMonitorOriginal': '', 'dongfengCostClick': '0', 'dongfengCostPv': '0', 'dongfengEf': '29444.96', 'ds': '20250609', 'equipmentNumberIdentificationRate': '', 'idfaRate': '', 'imeiRate': '', 'imeimd5': '', 'ipClickFilterRate': '', 'ipClickRate': '', 'ipFilterRate': '0.0', 'ipRate': '1', 'isClickMonitor': False, 'macRate': '', 'macmd5Rate': '', 'monitorClickPvDeviceidRate': '', 'oaidRate': '', 'paramCheckClickMonitorResult': '', 'paramCheckClickMonitorResultMsg': '', 'paramCheckClickResult': '', 'paramCheckClickResultMsg': '', 'paramCheckPvResult': '高风险', 'paramCheckPvResultMsg': 'androidDeviceCallBackRatio:0.0,iosDeviceCallBackRatio:0.9163069863532096,aidRate:0.9844784616862899,ipRate:1.0,ipFilterRate:0.0,uaRate:0.9747694588912624,uaFilterRate:0.0 113763000348 type is IOS-phone.命中规则高风险：ipFilterRate <0.01 && (iosDeviceCallBackRatio>=0.2 || ipRate>=0.5 ||  uaFilterRate>=0.0001)', 'paramCheckResult': '', 'paramCheckResultMsg': '', 'pid': 'mm_1902210064_2348000105_113763000348', 'pv': '', 'pvAaidRate': '0.0', 'pvCaidRate': '0.9163069863532096', 'pvDeviceidRate': '', 'pvIdfaRate': '0.07782564847584414', 'pvImeiRate': '0.0', 'pvMacRate': '0.0', 'pvMd5imeiRate': '0.0', 'pvMd5macRate': '0', 'pvOaidRate': '0.0', 'pvOneidRate': '', 'pvWithEquipmentNumber': '', 'pvWithEquipmentNumberRate': '', 'qingqiupv': '129983369', 'resourceId': '', 'tanxClk': '294337', 'tanxEffectPv': '657968', 'tanxPv': '', 'uaFilterRate': '0.0', 'uaRate': '0.9747694588912624', 'wakeupCnt': ''}
+2025-06-10 13:53:26,465 - 127.0.0.1 - - [10/Jun/2025 13:53:26] "POST /fetch_data HTTP/1.1" 200 -
+2025-06-10 13:55:44,993 - Program terminated by user.

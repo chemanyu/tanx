@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抓包工具</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        textarea, input[type="text"], button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        async function fetchData(url) {
+            const response = await fetch(url, { method: 'POST' });
+            const data = await response.text();
+            alert(data);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>抓包工具</h1>
+
+        <!-- Update Cookie Form -->
+        <form onsubmit="fetchData('/update_cookie'); return false;">
+            <label for="cookie">输入 Cookie 值：</label>
+            <textarea id="cookie" name="cookie" rows="5" required></textarea>
+            <button type="submit">更新 Cookie</button>
+        </form>
+
+        <!-- Ad Slot List Form -->
+        <form onsubmit="fetchData('/update_ad_slots'); return false;">
+            <label for="ad_slots">输入广告位列表（回车分割）：</label>
+            <textarea id="ad_slots" name="ad_slots" rows="5" required></textarea>
+            <button type="submit">更新广告位列表</button>
+        </form>
+
+        <!-- Manual Fetch Data Form -->
+        <form onsubmit="fetchData('/fetch_data'); return false;">
+            <button type="submit">手动抓包</button>
+        </form>
+
+        <!-- Selenium Fetch Data Form -->
+        <form onsubmit="fetchData('/selenium_fetch'); return false;">
+            <button type="submit">Selenium 抓包</button>
+        </form>
+    </div>
+</body>
+</html>
