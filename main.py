@@ -5,6 +5,7 @@ from flask import Flask, request, redirect
 from threading import Thread
 import logging
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -123,11 +124,11 @@ def insert_data(ds, pid, adzone_name, qingqiupv, active_ratio_df, tanx_effect_pv
         print(f"Failed to insert data for pid {pid}: {e}")
 
 
-@app.route('/cookie_input')
+@app.route('/')
 def cookie_input_page():
     try:
         # 使用绝对路径加载 HTML 文件
-        html_path = '/Users/chemanyu/workspace/python/tanx/cookie_input.html'
+        html_path = './cookie_input.html'
         with open(html_path, 'r') as file:
             html_content = file.read()
         # 将广告位列表插入到 <textarea> 中
@@ -291,7 +292,7 @@ def send_email(file_path):
             part = MIMEBase('application', 'octet-stream')
             part.set_payload(attachment.read())
         encoders.encode_base64(part)
-        part.add_header('Content-Disposition', f'attachment; filename={file_path.split('/')[-1]}')
+        part.add_header('Content-Disposition', f'attachment; filename={file_path.split("/")[-1]}')
         msg.attach(part)
 
         # Send the email
@@ -305,12 +306,99 @@ def send_email(file_path):
     except Exception as e:
         logging.error(f"Error sending email: {e}")
 
-# Schedule the task to run every day at 12:00
-#schedule.every().day.at("16:38").do(fetch_data)
-#schedule.every().day.at("16:38").do(fetch_data)
+# 定时更新Cookie的函数
+def fetch_and_update_cookie():
+    global cookie_value
+    driver = None  # Initialize driver to None
+    try:
+        # Set up Selenium WebDriver
+        options = webdriver.ChromeOptions()
+        options.add_argument('--headless')  # Run in headless mode
+        options.add_argument('--disable-gpu')
+        service = Service(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service, options=options)
+
+        # Navigate to the target page
+        driver.get('https://tanx.alimama.com/cooperation/pages/utils/traffic_verification')
+
+        # Wait for the page to load and extract cookies
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.TAG_NAME, 'body'))  # Wait for the body tag to load
+        )
+        time.sleep(5)
+        cookies = driver.get_cookies()
+        print(f"Fetched cookies: {cookies}")
+        # Format cookies into a string
+        cookie_value = '; '.join([f"{cookie['name']}={cookie['value']}" for cookie in cookies])
+        print(f"Updated cookie_value: {cookie_value}")
+        logging.info(f"Updated cookie_value: {cookie_value}")
+
+    except Exception as e:
+        logging.error(f"Error fetching and updating cookie: {e}")
+        print(f"Error fetching and updating cookie: {e}")
+
+    finally:
+        if driver:
+            driver.quit()
+
+
+def login_and_fetch_cookie():
+    global cookie_value
+    driver = None
+    try:
+        # Set up Selenium WebDriver
+        options = webdriver.ChromeOptions()
+        # Temporarily disable headless mode for debugging
+        # options.add_argument('--headless')
+        options.add_argument('--disable-gpu')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        service = Service(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service, options=options)
+
+        # Navigate to the login page
+        driver.get('https://tanx.alimama.com/login')
+
+        # Wait for the login form to load
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.ID, 'fm-login-id'))
+        )
+
+        # Fill in the login credentials
+        username_field = driver.find_element(By.ID, 'fm-login-id')
+        password_field = driver.find_element(By.ID, 'fm-login-password')
+        login_button = driver.find_element(By.CSS_SELECTOR, 'button[type="submit"]')
+
+        username_field.send_keys('tb85338658')
+        password_field.send_keys('AdMate2025.4.17&')
+        login_button.click()
+
+        # Wait for the page to load after login
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.TAG_NAME, 'body'))
+        )
+
+        # Extract cookies
+        cookies = driver.get_cookies()
+        cookie_value = '; '.join([f"{cookie['name']}={cookie['value']}" for cookie in cookies])
+        logging.info(f"Fetched cookies: {cookie_value}")
+        print(f"Fetched cookies: {cookie_value}")
+
+    except Exception as e:
+        logging.error(f"Error during login and cookie fetch: {e}")
+        print(f"Error during login and cookie fetch: {e}")
+
+    finally:
+        if driver:
+            driver.quit()
+
+# Call the function to fetch cookies
+login_and_fetch_cookie()
+
 # 新增一个定时任务，每十分钟执行一次 测试
-schedule.every(1).minutes.do(fetch_data)
-schedule.every(1).minutes.do(query_and_export_data)
+schedule.every().day.at("12:00").do(fetch_data)
+schedule.every().day.at("12:30").do(query_and_export_data)
+#schedule.every(1).minutes.do(fetch_and_update_cookie)
 
 
 flask_thread = Thread(target=run_flask)
