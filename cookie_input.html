@@ -90,13 +90,27 @@
         async function updateSchedulerStatus() {
             const response = await fetch('/scheduler_status');
             const statusList = await response.json();
-            const statusHTML = statusList.map(record => `
-                <div>
-                    <p>执行时间: ${record.execution_time}</p>
-                    <p>状态: ${record.status}</p>
-                </div>
-            `).join('<hr>');
-            document.getElementById('scheduler_status').innerHTML = '<h2>定时任务状态</h2><p>最近十次执行情况:</p>' + statusHTML;
+            const statusHTML = `
+                <h2 style="color: #333;">定时任务状态</h2>
+                <p style="color: #666;">最近十次执行情况:</p>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">执行时间</th>
+                            <th style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${statusList.map(record => `
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px;">${record.execution_time}</td>
+                                <td style="border: 1px solid #ccc; padding: 8px; color: ${record.status === '成功' ? 'green' : 'red'};">${record.status}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            document.getElementById('scheduler_status').innerHTML = statusHTML;
         }
 
         // 定时刷新状态

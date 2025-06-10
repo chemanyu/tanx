@@ -81,6 +81,8 @@ ad_slots = [
     "mm_2279650033_2540650473_114532100161"
 ]
 
+ad_slots_up = []
+
 # MySQL database configuration
 DB_CONFIG = {
     'host': '172.16.3.12',
@@ -141,8 +143,11 @@ def update_cookie():
 @app.route('/update_ad_slots', methods=['POST'])
 def update_ad_slots():
     global ad_slots
+    global ad_slots_up
     # 去掉传递进来的数据中的 \r
     ad_slots = [slot.replace('\r', '') for slot in request.form['ad_slots'].split('\n')]
+    if len(ad_slots_up) == 0:
+        ad_slots_up = ad_slots.copy()
     logging.info(f"广告位列表已更新: {ad_slots}")
     return "广告位列表已更新成功！"
 
@@ -180,13 +185,18 @@ def fetch_data():
                     logging.error(f"No data found for pid {pid} on {yesterday}")
                     print(f"No data found for pid {pid} on {yesterday}")
                     continue
+                # 将 activeRatioDf 转换为百分数格式
                 for item in tanx_monitor_param_list:
+                    active_ratio_df = item.get("activeRatioDf")
+                    ratio = float(active_ratio_df) * 100
+                    active_ratio_df_percent = str(f"{ratio:.2f}%")
+                    print(f"Processing pid: {pid}, active_ratio_df: {active_ratio_df_percent}")
                     insert_data(
                         item.get("ds"),
                         item.get("pid"),
                         item.get("adzoneName"),
                         item.get("qingqiupv"),
-                        item.get("activeRatioDf"),
+                        active_ratio_df_percent,
                         item.get("tanxEffectPv"),
                         item.get("tanxClk"),
                         item.get("dongfengEf")
@@ -224,9 +234,9 @@ def get_scheduler_status():
     return list(scheduler_status)
 
 # Schedule the task to run every day at 12:00
-schedule.every().day.at("16:38").do(fetch_data)
+#schedule.every().day.at("16:38").do(fetch_data)
 # 新增一个定时任务，每十分钟执行一次 测试
-#schedule.every(1).minutes.do(fetch_data)
+schedule.every(1).minutes.do(fetch_data)
 
 flask_thread = Thread(target=run_flask)
 flask_thread.start()
