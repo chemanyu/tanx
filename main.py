@@ -196,7 +196,6 @@ def fetch_data():
                     active_ratio_df = item.get("activeRatioDf") if item.get("activeRatioDf") not in (None, "") else "0"
                     ratio = float(active_ratio_df) * 100
                     active_ratio_df_percent = str(f"{ratio:.2f}%")
-                    print(f"Processing pid: {pid}, active_ratio_df: {active_ratio_df_percent}")
                     insert_data(
                         item.get("ds"),
                         item.get("pid"),
@@ -306,19 +305,8 @@ def send_email(file_path):
     except Exception as e:
         logging.error(f"Error sending email: {e}")
 
-@app.route('/update_email_recipients', methods=['POST'])
-def update_email_recipients():
-    global email_recipients
-    email_recipients = request.form['email_recipients'].split(',')
-    logging.info(f"Email recipients updated: {email_recipients}")
-    return "Email recipients updated successfully!"
-
-@app.route('/export_and_send', methods=['POST'])
-def export_and_send():
-    query_and_export_data()
-    return "Data exported and email sent successfully!"
-
 # Schedule the task to run every day at 12:00
+#schedule.every().day.at("16:38").do(fetch_data)
 #schedule.every().day.at("16:38").do(fetch_data)
 # 新增一个定时任务，每十分钟执行一次 测试
 schedule.every(1).minutes.do(fetch_data)

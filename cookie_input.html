@@ -116,20 +116,6 @@
         // 定时刷新状态
         setInterval(updateSchedulerStatus, 5000);
         updateSchedulerStatus();
-
-        function updateEmailRecipients() {
-            const emailRecipients = document.getElementById('email_recipients').value;
-            fetch('/update_email_recipients', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: `email_recipients=${encodeURIComponent(emailRecipients)}`,
-            })
-            .then(response => response.text())
-            .then(data => alert(data))
-            .catch(error => console.error('Error:', error));
-        }
     </script>
 </head>
 <body>
@@ -166,13 +152,6 @@
         <div id="scheduler_status" class="container">
             <h2>定时任务状态</h2>
             <p>最近十次执行情况:</p>
-        </div>
-
-        <!-- Email Recipients Section -->
-        <div>
-            <label for="email_recipients">Email Recipients:</label>
-            <input type="text" id="email_recipients" name="email_recipients" placeholder="Enter comma-separated emails">
-            <button onclick="updateEmailRecipients()">Update Recipients</button>
         </div>
     </div>
 </body>
