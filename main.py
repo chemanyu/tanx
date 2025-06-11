@@ -226,10 +226,11 @@ def fetch_data():
 @app.route('/fetch_data', methods=['POST'])
 def fetch_data_button():
     fetch_data()
+    query_and_export_data()
     return "抓包调用成功！"
 
 def run_flask():
-    app.run(port=5000)
+    app.run(port=6000)
 
 
 # 全局变量存储定时任务状态
@@ -267,7 +268,7 @@ def query_and_export_data():
         logging.error(f"Error querying or exporting data: {e}")
 
 # Global variable to store email recipients
-email_recipients = ['chemanyu@admate.cn']
+email_recipients = ['chemanyu@admate.cn','zhangwenjing@admate.cn']
 
 def send_email(file_path):
     try:
@@ -393,7 +394,7 @@ def login_and_fetch_cookie():
             driver.quit()
 
 # Call the function to fetch cookies
-login_and_fetch_cookie()
+#login_and_fetch_cookie()
 
 # 新增一个定时任务，每十分钟执行一次 测试
 schedule.every().day.at("12:00").do(fetch_data)
