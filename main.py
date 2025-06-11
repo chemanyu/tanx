@@ -129,7 +129,7 @@ def cookie_input_page():
     try:
         # 使用绝对路径加载 HTML 文件
         html_path = './cookie_input.html'
-        with open(html_path, 'r') as file:
+        with open(html_path, 'r', encoding='utf-8') as file:
             html_content = file.read()
         # 将广告位列表插入到 <textarea> 中
         ad_slots_text = "\n".join(ad_slots)
@@ -230,7 +230,7 @@ def fetch_data_button():
     return "抓包调用成功！"
 
 def run_flask():
-    app.run(port=6000)
+    app.run(port=5000)
 
 
 # 全局变量存储定时任务状态
@@ -253,7 +253,7 @@ def query_and_export_data():
             result = cursor.fetchall()
 
         # Convert the result to a pandas DataFrame
-        columns = ['ds', 'pid', 'adzone_name', 'qingqiupv', 'active_ratio_df', 'tanx_effect_pv', 'tanx_clk', 'dongfeng_ef']
+        columns = ['日期', '广告位', '广告位名称', 'tanx有效请求', '东风手淘换端率-同步点击', 'TANX曝光数', 'TANX点击数', 'TANX预估收益']
         df = pd.DataFrame(result, columns=columns)
 
         # Export the DataFrame to an Excel file
