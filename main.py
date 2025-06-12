@@ -102,10 +102,20 @@ DB_CONFIG = {
 # Establish a global database connection at project startup
 connection = pymysql.connect(**DB_CONFIG)
 
+# Ensure the DB connection is alive or reopen if dropped
+def get_connection():
+    global connection
+    try:
+        connection.ping(reconnect=True)
+    except Exception:
+        connection = pymysql.connect(**DB_CONFIG)
+    return connection
+
 # Function to insert data into the MySQL table
 def insert_data(ds, pid, adzone_name, qingqiupv, active_ratio_df, tanx_effect_pv, tanx_clk, dongfeng_ef):
     try:
-        with connection.cursor() as cursor:
+        conn = get_connection()
+        with conn.cursor() as cursor:
             sql = '''
             INSERT INTO tanx_monitor (ds, pid, adzone_name, qingqiupv, active_ratio_df, tanx_effect_pv, tanx_clk, dongfeng_ef, create_time)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, UNIX_TIMESTAMP())
@@ -248,7 +258,8 @@ def query_and_export_data():
         FROM tanx_monitor
         WHERE ds >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
         '''
-        with connection.cursor() as cursor:
+        conn = get_connection()
+        with conn.cursor() as cursor:
             cursor.execute(query)
             result = cursor.fetchall()
 
