@@ -29,29 +29,7 @@ app = Flask(__name__)
 logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
 # Global variable to store the cookie
-cookie_value = 'lgc=; wk_cookie2=167f0c4d672ac968e0a93b99b0d0321b; ' \
-'cookie2=16cd3b0638e9816bd345a1feea4ead65; cancelledSubSites=empty; ' \
-'t=aad3d47a3693faf2be2983e66f9366c7; sn=; _tb_token_=ee85e7738e7a7; ' \
-'XSRF-TOKEN=40246523-8598-46b3-8cf4-95ab422f784a; ' \
-'__itrace_wid=95ae536e-98c9-4b4d-80b3-e28c2a186e6a; ' \
-'cna=VWfNIPe5zgoCASvziD7zfIGi; xlly_s=1; ' \
-'cookie3_bak=16cd3b0638e9816bd345a1feea4ead65; login=true; ' \
-'env_bak=FM%2BgywHD7Unoz8SbIc%2FnUBfFQSvsP66Kkma08fliLj6Y; ' \
-'havana_lgc_exp=1780553644693; cookie3_bak_exp=1749708844693; dnk=tb85338658; ' \
-'uc1=cookie21=Vq8l%2BKCLjhS4UhJVac7m&cookie16=VFC%2FuZ9az08KUQ56dCrZDlbNdA%3D%3D&pas=0' \
-'&cookie15=VFC%2FuZ9ayeYq2g%3D%3D&cookie14=UoYagkR3PZ3UQw%3D%3D&existShop=false; ' \
-'tracknick=tb85338658; lid=tb85338658; _l_g_=Ug%3D%3D; unb=3895799029; ' \
-'cookie1=B0eh2kgmi29iNjmbWg2JUdr7m2PoH4FQJcna5FWIY2c%3D; cookie17=UNiN%2FYvCapPgTg%3D%3D; ' \
-'_nk_=tb85338658; sgcookie=E100DLStFIXeqkyuZKGpXbna2HJxRf4TTqNa9lwcg5Esm%2FaEBoX' \
-'P9PgZXe6lS98he2BPRnFvsR4YFw90sB1SrfQzHL7CkYCvmMx7373FvGHZ2vg%3D; sg=897;' \
-' csg=0b687ed8; wk_unb=UNiN%2FYvCapPgTg%3D%3D; __wpkreporterwid_=08407be1-a5ed-4adc-' \
-'3102-f98773652212; tfstk=gCZmWVtMzbOBiR5-yuif8y_yh5_-Gmi_b5Kt6chNzblWXtw9XzmgNS0Ah-' \
-'QbrfVzZjrxDmewjRVMX-nYB72a6WavDmkxQGV7Cj-tWZTMSSF1GFBjWGYgM5Ni5tGt_fVTQrBRvMebhcia' \
-'I6Idv_Ne2urm_CnZc0ReczVcvMeb3KHVp8SLXQZtAblZbquZaQlSBh84_j8PEAk9gF-4_TXoBv8w3nuqU' \
-'YkjBcla_cWuUbMibxPZbfecwjhq1u582Zcgsza8qx0mT-bBbhqkvqcU3bxNTuDmOXyqZh-Zt8NaCRPNshnU' \
-'R7qi85sMVme3z0k0rO8rg244MYNGxnl4q-rqMo5JDjrbUyETaO-ZszzEJjz5NGg4RSUEruCDVXzzER3uPO' \
-'Tx6yMa12ZOOnG4QJZQJDjMIY43U0jyIU8FNwKsUOEy5FgqFYcLuGIsmBZ0ejXlEekmuYM22TXk5igqFYDcE' \
-'TYFTqkS3Q1..; isg=BK-vcQqHG2EQ3B9cyDvQkHJPPsW5VAN2eHI3zME-7Z_5EMsSySbKx-JWkAAuaNvu'
+cookie_value = ''
 
 # 默认的广告位列表
 ad_slots = [
@@ -85,7 +63,7 @@ ad_slots = [
     "mm_2279650033_2540650473_111835500278",
     "mm_2279650033_2540650473_111835750274",
     "mm_2279650033_2540650473_114534000022",
-    "mm_2279650033_2540650473_114532100161"
+    "mm_2279650033_2540650473_114532100161",
 ]
 
 ad_slots_up = []
@@ -318,92 +296,6 @@ def send_email(file_path):
     except Exception as e:
         logging.error(f"Error sending email: {e}")
 
-# 定时更新Cookie的函数
-def fetch_and_update_cookie():
-    global cookie_value
-    driver = None  # Initialize driver to None
-    try:
-        # Set up Selenium WebDriver
-        options = webdriver.ChromeOptions()
-        options.add_argument('--headless')  # Run in headless mode
-        options.add_argument('--disable-gpu')
-        service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=options)
-
-        # Navigate to the target page
-        driver.get('https://tanx.alimama.com/cooperation/pages/utils/traffic_verification')
-
-        # Wait for the page to load and extract cookies
-        WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.TAG_NAME, 'body'))  # Wait for the body tag to load
-        )
-        time.sleep(5)
-        cookies = driver.get_cookies()
-        print(f"Fetched cookies: {cookies}")
-        # Format cookies into a string
-        cookie_value = '; '.join([f"{cookie['name']}={cookie['value']}" for cookie in cookies])
-        print(f"Updated cookie_value: {cookie_value}")
-        logging.info(f"Updated cookie_value: {cookie_value}")
-
-    except Exception as e:
-        logging.error(f"Error fetching and updating cookie: {e}")
-        print(f"Error fetching and updating cookie: {e}")
-
-    finally:
-        if driver:
-            driver.quit()
-
-
-def login_and_fetch_cookie():
-    global cookie_value
-    driver = None
-    try:
-        # Set up Selenium WebDriver
-        options = webdriver.ChromeOptions()
-        # Temporarily disable headless mode for debugging
-        # options.add_argument('--headless')
-        options.add_argument('--disable-gpu')
-        options.add_argument('--no-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
-        service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=options)
-
-        # Navigate to the login page
-        driver.get('https://tanx.alimama.com/login')
-
-        # Wait for the login form to load
-        WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.ID, 'fm-login-id'))
-        )
-
-        # Fill in the login credentials
-        username_field = driver.find_element(By.ID, 'fm-login-id')
-        password_field = driver.find_element(By.ID, 'fm-login-password')
-        login_button = driver.find_element(By.CSS_SELECTOR, 'button[type="submit"]')
-
-        username_field.send_keys('tb85338658')
-        password_field.send_keys('AdMate2025.4.17&')
-        login_button.click()
-
-        # Wait for the page to load after login
-        WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.TAG_NAME, 'body'))
-        )
-
-        # Extract cookies
-        cookies = driver.get_cookies()
-        cookie_value = '; '.join([f"{cookie['name']}={cookie['value']}" for cookie in cookies])
-        logging.info(f"Fetched cookies: {cookie_value}")
-        print(f"Fetched cookies: {cookie_value}")
-
-    except Exception as e:
-        logging.error(f"Error during login and cookie fetch: {e}")
-        print(f"Error during login and cookie fetch: {e}")
-
-    finally:
-        if driver:
-            driver.quit()
-
 # Call the function to fetch cookies
 #login_and_fetch_cookie()
 
@@ -426,51 +318,3 @@ try:
 except KeyboardInterrupt:
     print("Program terminated by user.")
     logging.info("Program terminated by user.")
-
-
-
-# 调用浏览器抓包，备选，不一定用
-# def selenium_fetch_data():
-#     # Set up the Selenium WebDriver
-#     options = webdriver.ChromeOptions()
-#     options.add_argument('--headless')
-#     options.add_argument('--disable-gpu')
-#     service = Service(CHROME_DRIVER_PATH)
-#     driver = webdriver.Chrome(service=service, options=options)
-    
-#     try:
-#         # Navigate to the target page
-#         driver.get('https://tanx.alimama.com/cooperation/pages/utils/traffic_verification')
-
-#         # Wait for the page to load and interact with elements
-#         WebDriverWait(driver, 10).until(
-#             EC.presence_of_element_located((By.ID, 'date'))  # Example element ID
-#         )
-
-#         # Select fields and perform query
-#         date_field = driver.find_element(By.ID, 'date')
-#         date_field.send_keys('2025-06-09')  # Example date
-
-#         query_button = driver.find_element(By.ID, 'query')  # Example button ID
-#         query_button.click()
-
-#         # Wait for results to load
-#         WebDriverWait(driver, 10).until(
-#             EC.presence_of_element_located((By.CLASS_NAME, 'result'))  # Example result class
-#         )
-
-#         # Extract and log results
-#         results = driver.find_element(By.CLASS_NAME, 'result').text
-#         logging.info(f"Selenium Results: {results}")
-#         print(results)
-
-#     finally:
-#         driver.quit()
-
-# @app.route('/selenium_fetch', methods=['POST'])
-# def selenium_fetch_button():
-#     selenium_fetch_data()
-#     return "Selenium 抓包调用成功！"
-
-
-
