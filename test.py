@@ -21,6 +21,9 @@ def login_and_fetch_cookie():
         # Set up Chrome options
         options = webdriver.ChromeOptions()
         
+        # 启用性能日志
+        options.set_capability('goog:loggingPrefs', {'performance': 'ALL'})
+        
         # 禁用自动化标志
         options.add_argument("--disable-blink-features=AutomationControlled")
         options.add_experimental_option("excludeSwitches", ["enable-automation"])
@@ -361,15 +364,42 @@ def login_and_fetch_cookie():
         
         # 等待新页面加载
         time.sleep(5)
+        
+        # 启用网络请求监听
+        driver.execute_cdp_cmd('Network.enable', {})
+        
+        # 获取网络请求信息
+        cookie_value = None
+        
+        try:
+            # 访问目标页面获取特定请求的cookie
+            # driver.get('https://tanx.alimama.com/cooperation/pages/utils/traffic_verification')
+            # time.sleep(3)
             
-        # 获取cookies
-        cookies = driver.get_cookies()
-        cookie_value = '; '.join([f"{cookie['name']}={cookie['value']}" for cookie in cookies])
-        logging.info("Successfully fetched cookies")
-        logging.info(f"Cookie value: {cookie_value}")
+            # 获取特定域名的cookies
+            domain_cookies = driver.execute_cdp_cmd('Network.getCookies', {
+                "urls": ["https://tanx.alimama.com"]
+            })
+            
+            if domain_cookies and 'cookies' in domain_cookies:
+                cookies = domain_cookies['cookies']
+                cookie_strings = []
+                for cookie in cookies:
+                    if 'name' in cookie and 'value' in cookie:
+                        cookie_strings.append(f"{cookie['name']}={cookie['value']}")
+                
+                if cookie_strings:
+                    cookie_value = '; '.join(cookie_strings)
+                    logging.info("获取到tanx.alimama.com域名的Cookie")
+                    logging.info(f"Cookie value: {cookie_value}")
+            
+            if not cookie_value:
+                logging.warning("未能获取到所需的Cookie")
+        except Exception as e:
+            logging.error(f"获取Cookie时发生错误: {str(e)}")
         
         # 保持浏览器打开以便查看结果
-        time.sleep(60)  # 增加到60秒，给更多时间查看
+        time.sleep(10)  # 增加到60秒，给更多时间查看
         
         return cookie_value
         
@@ -377,41 +407,6 @@ def login_and_fetch_cookie():
         logging.error(f"Error during login process: {str(e)}")
         return None
         
-    #finally:
-        # if driver:
-        #     driver.quit()
-
-
-def fetch_and_update_cookie():
-    global cookie_value
-    driver = None  # Initialize driver to None
-    try:
-        # Set up Selenium WebDriver
-        options = webdriver.ChromeOptions()
-        options.add_argument('--headless')  # Run in headless mode
-        options.add_argument('--disable-gpu')
-        service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=options)
-
-        # Navigate to the target page
-        driver.get('https://tanx.alimama.com/cooperation/pages/utils/traffic_verification')
-
-        # Wait for the page to load and extract cookies
-        WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.TAG_NAME, 'body'))  # Wait for the body tag to load
-        )
-        time.sleep(5)
-        cookies = driver.get_cookies()
-        print(f"Fetched cookies: {cookies}")
-        # Format cookies into a string
-        cookie_value = '; '.join([f"{cookie['name']}={cookie['value']}" for cookie in cookies])
-        print(f"Updated cookie_value: {cookie_value}")
-        logging.info(f"Updated cookie_value: {cookie_value}")
-
-    except Exception as e:
-        logging.error(f"Error fetching and updating cookie: {e}")
-        print(f"Error fetching and updating cookie: {e}")
-
     finally:
         if driver:
             driver.quit()
