@@ -279,7 +279,7 @@ def query_and_export_data():
         logging.error(f"Error querying or exporting data: {e}")
 
 # Global variable to store email recipients
-email_recipients = ['chemanyu@admate.cn','zhangwenjing@admate.cn']
+email_recipients = ['chemanyu@admate.cn','zhangwenjing@admate.cn','xuzhongwang@admate.cn','fanang@admate.cn']
 
 def send_email(file_path):
     try:
