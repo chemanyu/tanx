@@ -20,6 +20,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
+from cookie import login_and_fetch_cookie  # 从cookie.py导入方法
 
 CHROME_DRIVER_PATH = "/opt/homebrew/bin/chromedriver" #
 
@@ -34,36 +35,36 @@ cookie_value = ''
 # 默认的广告位列表
 ad_slots = [
     "mm_1902210064_2348000105_111662900182",
-    "mm_1902210064_2348000105_111663100185",
-    "mm_1902210064_2348000105_113763000348",
-    "mm_1902210064_2348000105_113765750160",
-    "mm_3447365382_2749500311_114553400117",
-    "mm_3447365382_2749500311_114552150188",
-    "mm_1861850082_2364600045_112144700173",
-    "mm_1873810155_2320450209_111384500336",
-    "mm_1873810155_2320450209_111953150429",
-    "mm_1873810155_2320450209_111953700467",
-    "mm_1861850082_2364600045_115796950045",
-    "mm_1861850082_2364600045_111952850176",
-    "mm_1861850082_2364600045_111952350174",
-    "mm_1562690005_2184850029_111650700372",
-    "mm_1562690005_2184850029_111651000378",
-    "mm_1562690005_2184850029_112164850011",
-    "mm_1562690005_2184850029_112159050469",
-    "mm_6899417631_3131950139_115762350460",
-    "mm_6899417631_3131950139_115765600056",
-    "mm_6899417631_3131950139_115768000140",
-    "mm_6899417631_3131950139_115764850334",
-    "mm_6899417631_3131950139_115840550019",
-    "mm_6899417631_3131950139_115834100467",
-    "mm_2279650033_2540650473_111838750084",
-    "mm_2279650033_2540650473_111836000276",
-    "mm_2279650033_2540650473_111835400327",
-    "mm_2279650033_2540650473_111835250296",
-    "mm_2279650033_2540650473_111835500278",
-    "mm_2279650033_2540650473_111835750274",
-    "mm_2279650033_2540650473_114534000022",
-    "mm_2279650033_2540650473_114532100161",
+    # "mm_1902210064_2348000105_111663100185",
+    # "mm_1902210064_2348000105_113763000348",
+    # "mm_1902210064_2348000105_113765750160",
+    # "mm_3447365382_2749500311_114553400117",
+    # "mm_3447365382_2749500311_114552150188",
+    # "mm_1861850082_2364600045_112144700173",
+    # "mm_1873810155_2320450209_111384500336",
+    # "mm_1873810155_2320450209_111953150429",
+    # "mm_1873810155_2320450209_111953700467",
+    # "mm_1861850082_2364600045_115796950045",
+    # "mm_1861850082_2364600045_111952850176",
+    # "mm_1861850082_2364600045_111952350174",
+    # "mm_1562690005_2184850029_111650700372",
+    # "mm_1562690005_2184850029_111651000378",
+    # "mm_1562690005_2184850029_112164850011",
+    # "mm_1562690005_2184850029_112159050469",
+    # "mm_6899417631_3131950139_115762350460",
+    # "mm_6899417631_3131950139_115765600056",
+    # "mm_6899417631_3131950139_115768000140",
+    # "mm_6899417631_3131950139_115764850334",
+    # "mm_6899417631_3131950139_115840550019",
+    # "mm_6899417631_3131950139_115834100467",
+    # "mm_2279650033_2540650473_111838750084",
+    # "mm_2279650033_2540650473_111836000276",
+    # "mm_2279650033_2540650473_111835400327",
+    # "mm_2279650033_2540650473_111835250296",
+    # "mm_2279650033_2540650473_111835500278",
+    # "mm_2279650033_2540650473_111835750274",
+    # "mm_2279650033_2540650473_114534000022",
+    # "mm_2279650033_2540650473_114532100161",
 ]
 
 ad_slots_up = []
@@ -213,6 +214,7 @@ def fetch_data():
 
 @app.route('/fetch_data', methods=['POST'])
 def fetch_data_button():
+    update_cookie_task()  # 确保在抓包前更新cookie
     fetch_data()
     query_and_export_data()
     return "抓包调用成功！"
@@ -258,6 +260,7 @@ def query_and_export_data():
 
 # Global variable to store email recipients
 email_recipients = ['chemanyu@admate.cn','zhangwenjing@admate.cn','xuzhongwang@admate.cn','fanang@admate.cn']
+#email_recipients = ['chemanyu@admate.cn']
 
 def send_email(file_path):
     try:
@@ -296,13 +299,23 @@ def send_email(file_path):
     except Exception as e:
         logging.error(f"Error sending email: {e}")
 
-# Call the function to fetch cookies
-#login_and_fetch_cookie()
+# 定时更新cookie的函数
+def update_cookie_task():
+    global cookie_value
+    new_cookie = login_and_fetch_cookie()
+    if new_cookie:
+        cookie_value = new_cookie
+        logging.info("自动更新Cookie成功")
+    else:
+        logging.error("自动更新Cookie失败")
+
+# 在启动时立即执行一次cookie更新
+update_cookie_task()
 
 # 新增一个定时任务，每十分钟执行一次 测试
-schedule.every().day.at("12:00").do(fetch_data)
+schedule.every().day.at("12:00").do(update_cookie_task)  # 使用新的update_cookie_task函数
+schedule.every().day.at("12:15").do(fetch_data)
 schedule.every().day.at("12:30").do(query_and_export_data)
-#schedule.every(1).minutes.do(fetch_and_update_cookie)
 
 
 flask_thread = Thread(target=run_flask)
@@ -314,7 +327,7 @@ try:
     while True:
         schedule.run_pending()
         print("Pending tasks executed.")  # 调试日志
-        time.sleep(1)
+        time.sleep(60)
 except KeyboardInterrupt:
     print("Program terminated by user.")
     logging.info("Program terminated by user.")
