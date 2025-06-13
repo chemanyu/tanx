@@ -30,7 +30,7 @@ app = Flask(__name__)
 logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
 # Global variable to store the cookie
-cookie_value = ''
+cookie_value = 'wk_cookie2=167f0c4d672ac968e0a93b99b0d0321b; __itrace_wid=95ae536e-98c9-4b4d-80b3-e28c2a186e6a; cna=VWfNIPe5zgoCASvziD7zfIGi; env_bak=FM%2BgywHD7Unoz8SbIc%2FnUBfFQSvsP66Kkma08fliLj6Y; __wpkreporterwid_=08407be1-a5ed-4adc-3102-f98773652212; t_alimama=ee2cffdec21995b8105c3f08a73ab6c9; lgc=; cookie2=1e5d78ccd2b97d0d1da082d51dd217ce; t=aad3d47a3693faf2be2983e66f9366c7; sn=; _tb_token_=7384e3d9e335a; XSRF-TOKEN=cb12569d-1278-439d-adef-7ace59411b33; cookie3_bak=1e5d78ccd2b97d0d1da082d51dd217ce; login=true; cancelledSubSites=empty; xlly_s=1; dnk=%5Cu5929%5Cu6D25%5Cu6D69%5Cu777F%5Cu4FE1%5Cu606F%5Cu79D1%5Cu6280%5Cu6709%5Cu9650%5Cu516C%5Cu53F8; tracknick=%5Cu5929%5Cu6D25%5Cu6D69%5Cu777F%5Cu4FE1%5Cu606F%5Cu79D1%5Cu6280%5Cu6709%5Cu9650%5Cu516C%5Cu53F8; lid=%E5%A4%A9%E6%B4%A5%E6%B5%A9%E7%9D%BF%E4%BF%A1%E6%81%AF%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8; wk_unb=UUpgTs0%2BqS386PihCA%3D%3D; _l_g_=Ug%3D%3D; cookie1=U7ZvqNzFjt0WHllf4lbxAgQ5Wl4LJjp%2Fl6HVIQ%2FXkiU%3D; sg=%E5%8F%B85e; uc1=cookie14=UoYagke%2BQnvi0A%3D%3D&pas=0&cookie15=V32FPkk%2Fw0dUvg%3D%3D&existShop=false&cookie16=UtASsssmPlP%2Ff1IHDsDaPRu%2BPw%3D%3D&cookie21=VT5L2FSpdiBh; havana_lgc_exp=1780898242562; unb=2218492598755; cookie17=UUpgTs0%2BqS386PihCA%3D%3D; _nk_=%5Cu5929%5Cu6D25%5Cu6D69%5Cu777F%5Cu4FE1%5Cu606F%5Cu79D1%5Cu6280%5Cu6709%5Cu9650%5Cu516C%5Cu53F8; sgcookie=E100Iwg5vQePW%2FuvoH870NOoXXaNTJ0n3ETkubPIWgdgirmz3UJSBvaSCd7DDVlbUy1zB%2BSIN9KnVy%2B5Hh5yVVEzOPAkx3QSfJAoimBHTiaJr4A%3D; csg=5ce22315; cookie3_bak_exp=1750053442563; tfstk=gGIK-W2eFRHplBjpI9ziZYhTGPegiPXFQ6WjqQAnP1CO3_LoZTaUeuCGwe2FFW5R2C1ytBxuLUtR36dHrHtk2bCcUBgHZw2JNC6XEJyzUudR5tbHEw2z2QKFjwmktW-RFsx8iSq0m9Wev3N0iYRfPmteeLMBFbc_fLtJd1faKXWe43NiI0a0D95FfMKVN3w9fLprP3OIVfw9nL-SAUiI5fOw139WdB66Cpv-VDO5NOw9UCOWV31WfRpr_w2p_v9K2ZAxuReKeGiSVGpp5PXB1ETYEpTpG9OTG_SMpQRfdCnSVIBNNTW5N7nkcZ5O2E1z2c-hHNt6pNeS5BTAR6vNwonBOGBCABjQsDACYO_cq1wSVQQ1lEAC75ryRZ5hlFIg9cRf5OBkWNyr-Qb2F_8VqSoeOT6V0ZxY2YpOkOtO4BjcD96siIpoRRetz48BQ0A3ih05JwJWBI2BR4uyrdooJgJjz48tmdd0IOurzF0c.; isg=BMrKpYwglklzYxrv_SRNU794G7Zsu04VvzPZEVQDopw0B2vBPE6OJgn1E3Pb98at'
 
 # 默认的广告位列表
 ad_slots = [
@@ -40,13 +40,18 @@ ad_slots = [
     "mm_1902210064_2348000105_113765750160",
     "mm_3447365382_2749500311_114553400117",
     "mm_3447365382_2749500311_114552150188",
-    "mm_1861850082_2364600045_112144700173",
     "mm_1873810155_2320450209_111384500336",
     "mm_1873810155_2320450209_111953150429",
     "mm_1873810155_2320450209_111953700467",
+    "mm_1873810155_2320450209_115792250490",
+    "mm_1873810155_2320450209_115890350442",
+    "mm_1873810155_2320450209_115894200243",
+    "mm_1873810155_2320450209_115797000138",
+    "mm_1873810155_2320450209_111388400121",
     "mm_1861850082_2364600045_115796950045",
     "mm_1861850082_2364600045_111952850176",
     "mm_1861850082_2364600045_111952350174",
+    "mm_1861850082_2364600045_111484350168",
     "mm_1562690005_2184850029_111650700372",
     "mm_1562690005_2184850029_111651000378",
     "mm_1562690005_2184850029_112164850011",
@@ -174,7 +179,9 @@ def fetch_data():
             #print(f"Fetching data for url:{url} pid: {pid} with data: {data} response data: {response}")
             try:
                 response_data = response.json()
-                #print(f"Fetching response_data: {response_data}")
+                if response_data.get("info", {}).get("errorCode") == "user_not_login":
+                    logging.info("User not logged in, please update cookie.")
+                    update_cookie_task()  # 自动更新cookie
                 tanx_monitor_param_list = response_data.get("data", {}).get("clickMonitorParamList", [])
                 # 修改条件判断，检查列表是否为空
                 if len(tanx_monitor_param_list) == 0:
@@ -214,7 +221,6 @@ def fetch_data():
 
 @app.route('/fetch_data', methods=['POST'])
 def fetch_data_button():
-    update_cookie_task()  # 确保在抓包前更新cookie
     fetch_data()
     query_and_export_data()
     return "抓包调用成功！"
@@ -309,13 +315,10 @@ def update_cookie_task():
     else:
         logging.error("自动更新Cookie失败")
 
-# 在启动时立即执行一次cookie更新
-update_cookie_task()
 
-# 新增一个定时任务，每十分钟执行一次 测试
-schedule.every().day.at("12:00").do(update_cookie_task)  # 使用新的update_cookie_task函数
-schedule.every().day.at("12:15").do(fetch_data)
-schedule.every().day.at("12:30").do(query_and_export_data)
+# 设置定时任务
+schedule.every().day.at("12:15").do(fetch_data)  # 每天抓取数据
+schedule.every().day.at("12:30").do(query_and_export_data)  # 每天导出数据
 
 
 flask_thread = Thread(target=run_flask)
