@@ -74,15 +74,9 @@ def login_and_fetch_cookie():
         time.sleep(5)  # 给页面更多时间完全加载和稳定
         logging.info("Starting iframe detection process...")
         
-        # 保存初始页面源码用于调试
-        with open('initial_page.html', 'w', encoding='utf-8') as f:
-            f.write(driver.page_source)
-        
         # 尝试多种定位器定位iframe
         iframe_found = False
         iframe_locators = [
-            #(By.CSS_SELECTOR, "#J_loginIframe"),
-            #(By.ID, "J_loginIframe"),
             (By.CSS_SELECTOR, "iframe[src*='login']"),
             (By.TAG_NAME, "iframe")
         ]
@@ -137,12 +131,8 @@ def login_and_fetch_cookie():
         
         if not iframe_found:
             logging.error("Failed to switch to iframe after trying all methods")
-            # 保存当前页面状态以供调试
-            driver.save_screenshot('iframe_switch_failed.png')
-            with open('iframe_failed.html', 'w', encoding='utf-8') as f:
-                f.write(driver.page_source)
             raise Exception("Could not locate or switch to login iframe")
-        
+            
         # 等待页面元素加载完成并确保 iframe 内容已加载
         time.sleep(3)
         wait.until(lambda d: d.execute_script('return document.readyState') == 'complete')
@@ -219,16 +209,16 @@ def login_and_fetch_cookie():
         
         # 用户名输入定位器
         username_locators = [
-            (By.CSS_SELECTOR, "#username"),
-            (By.NAME, "username"),
+            #(By.CSS_SELECTOR, "#username"),
+            #(By.NAME, "username"),
             (By.CSS_SELECTOR, "input[type='text']"),
             (By.XPATH, "//input[@placeholder='请输入账号']")
         ]
         
         # 密码输入定位器
         password_locators = [
-            (By.CSS_SELECTOR, "#password"),
-            (By.NAME, "password"),
+            #(By.CSS_SELECTOR, "#password"),
+            #(By.NAME, "password"),
             (By.CSS_SELECTOR, "input[type='password']"),
             (By.XPATH, "//input[@placeholder='请输入密码']")
         ]
@@ -236,7 +226,6 @@ def login_and_fetch_cookie():
         # 尝试输入用户名
         if not try_input_field(username_locators, username, "username"):
             logging.error("Failed to input username after trying all methods")
-            driver.save_screenshot('username_input_failed.png')
             raise Exception("Could not input username")
         
         time.sleep(random.uniform(0.8, 1.5))
@@ -244,7 +233,6 @@ def login_and_fetch_cookie():
         # 尝试输入密码
         if not try_input_field(password_locators, password, "password"):
             logging.error("Failed to input password after trying all methods")
-            driver.save_screenshot('password_input_failed.png')
             raise Exception("Could not input password")
         
         # 输入密码
@@ -258,54 +246,7 @@ def login_and_fetch_cookie():
             time.sleep(random.uniform(0.05, 0.2))
         logging.info("Password entered")
         
-        # 处理滑块验证
-        try:
-            slider = wait.until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "#nc_1_n1z"))
-            )
-            logging.info("Slider captcha detected")
-            
-            # 获取滑块大小和位置
-            slider_size = slider.size
-            slider_location = slider.location
-            
-            # 创建更真实的人工滑动轨迹
-            action = ActionChains(driver)
-            action.click_and_hold(slider)
-            time.sleep(random.uniform(0.5, 0.7))
-            
-            # 生成随机的人工轨迹
-            tracks = []
-            current = 0
-            mid = width = 300  # 假设滑块总长度为300
-            v = 0
-            while current < width:
-                if current < mid:
-                    a = random.uniform(2.5, 3.5)
-                else:
-                    a = -random.uniform(2.0, 3.0)
-                v0 = v
-                v = v0 + a * 0.2
-                move = v0 * 0.2 + 1/2 * a * 0.2 * 0.2
-                current += move
-                tracks.append(round(move))
-            
-            # 执行滑动
-            for track in tracks:
-                action.move_by_offset(track, random.randint(-2, 2))
-                action.pause(random.uniform(0.01, 0.03))
-            
-            # 模拟释放时的抖动
-            action.move_by_offset(random.randint(-2, 2), random.randint(-1, 1))
-            action.pause(random.uniform(0.2, 0.3))
-            action.release()
-            action.perform()
-            
-            time.sleep(random.uniform(1.0, 1.5))
-            logging.info("Slider verification completed")
-        except Exception as e:
-            logging.info(f"No slider captcha or verification completed: {str(e)}")
-        
+       
         # 登录按钮定位器
         login_button_locators = [
             (By.CSS_SELECTOR, "button[type='submit']"),
@@ -364,7 +305,6 @@ def login_and_fetch_cookie():
         
         if not button_clicked:
             logging.error("Failed to click login button after trying all methods")
-            driver.save_screenshot('login_button_failed.png')
             raise Exception("Could not click login button")
             
         # 等待登录结果
@@ -374,8 +314,7 @@ def login_and_fetch_cookie():
         try:
             # 检查是否仍在登录页面
             if "login" in driver.current_url.lower():
-                logging.error("Still on login page after submit")
-                driver.save_screenshot('login_failed.png')
+                logging.error("Login failed - still on login page")
                 raise Exception("Login failed - still on login page")
                 
             # 尝试定位登录后才会出现的元素
@@ -386,7 +325,6 @@ def login_and_fetch_cookie():
             
         except Exception as e:
             logging.error(f"Login verification failed: {str(e)}")
-            driver.save_screenshot('login_verification_failed.png')
             raise Exception("Could not verify successful login")
         
         # 切换回主文档并获取cookies
@@ -408,12 +346,6 @@ def login_and_fetch_cookie():
         
     except Exception as e:
         logging.error(f"Error during login process: {str(e)}")
-        if driver:
-            # 保存错误截图和页面源码
-            timestamp = time.strftime("%Y%m%d-%H%M%S")
-            driver.save_screenshot(f'login_error_{timestamp}.png')
-            with open(f'page_source_{timestamp}.html', 'w', encoding='utf-8') as f:
-                f.write(driver.page_source)
         return None
         
     finally:
