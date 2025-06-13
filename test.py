@@ -287,36 +287,91 @@ def login_and_fetch_cookie():
         # 等待登录结果
         time.sleep(10)  # 给登录过程足够时间
         
-        # 检查登录结果
-        # try:
-        #     # 检查是否仍在登录页面
-        #     if "login" in driver.current_url.lower():
-        #         logging.error("Login failed - still on login page")
-        #         raise Exception("Login failed - still on login page")
-                
-        #     # 尝试定位登录后才会出现的元
+        # 尝试点击"进入系统"按钮
+        enter_system_locators = [
+            #(By.CSS_SELECTOR, "button[type='button']"),  # 基于按钮类型
+            (By.XPATH, "//button[text()='进入系统']"),  # 精确的文本匹配
+            (By.CSS_SELECTOR, ".ant-btn.ant-btn-primary"),  # 蓝色主按钮的类名
+            (By.CSS_SELECTOR, "div.login-wrapper button")  # 登录包装器内的按钮
+        ]
+        
+        # 切换回主文档，因为可能还在iframe中
+        try:
+            driver.switch_to.default_content()
+        except:
+            pass
             
-        # except Exception as e:
-        #     logging.error(f"Login verification failed: {str(e)}")
-        #     raise Exception("Could not verify successful login")
+        # 多次尝试点击进入系统按钮
+        button_clicked = False
+        try:
+            for by, locator in enter_system_locators:
+                try:
+                    logging.info(f"尝试定位进入系统按钮 using {by}: {locator}")
+                    # 等待按钮可点击
+                    enter_button = wait.until(
+                        EC.element_to_be_clickable((by, locator))
+                    )
+                    
+                    # 确保按钮在视图中
+                    driver.execute_script("arguments[0].scrollIntoView(true);", enter_button)
+                    time.sleep(1)
+                    
+                    # 尝试点击按钮
+                    try:
+                        # 直接点击
+                        enter_button.click()
+                        logging.info("成功点击进入系统按钮")
+                        button_clicked = True
+                        time.sleep(5)  # 等待页面加载
+                        break
+                    except Exception as e:
+                        logging.warning(f"直接点击失败，尝试JS点击: {str(e)}")
+                        try:
+                            # JavaScript点击
+                            driver.execute_script("arguments[0].click();", enter_button)
+                            logging.info("使用JS成功点击进入系统按钮")
+                            button_clicked = True
+                            time.sleep(5)  # 等待页面加载
+                            break
+                        except Exception as e2:
+                            logging.warning(f"JS点击也失败，尝试Actions点击: {str(e2)}")
+                            try:
+                                # ActionChains点击
+                                actions = ActionChains(driver)
+                                actions.move_to_element(enter_button)
+                                actions.click()
+                                actions.perform()
+                                logging.info("使用Actions成功点击进入系统按钮")
+                                button_clicked = True
+                                time.sleep(5)  # 等待页面加载
+                                break
+                            except Exception as e3:
+                                logging.warning(f"Actions点击也失败: {str(e3)}")
+                                continue
+                except Exception as e:
+                    logging.warning(f"当前定位器未找到按钮: {str(e)}")
+                    continue
+                    
+        except Exception as e:
+            logging.warning(f"尝试点击进入系统按钮失败: {str(e)}")
+            time.sleep(3)  # 等待一会再试
+
+        if not button_clicked:
+            logging.warning("无法点击进入系统按钮，但继续执行...")
         
-        # 切换回主文档并获取cookies
-        # driver.switch_to.default_content()
-        
-        # # 验证登录是否成功
-        # try:
-        #     wait.until(EC.url_changes('https://tanx.alimama.com/login'))
-        #     logging.info("Login successful - URL changed")
-        # except:
-        #     logging.error("Login might have failed - URL didn't change")
+        # 等待新页面加载
+        time.sleep(5)
             
         # 获取cookies
         cookies = driver.get_cookies()
         cookie_value = '; '.join([f"{cookie['name']}={cookie['value']}" for cookie in cookies])
         logging.info("Successfully fetched cookies")
-        logging.info(cookie_value)
+        logging.info(f"Cookie value: {cookie_value}")
         
-        #return cookie_value
+        # 保持浏览器打开以便查看结果
+        time.sleep(60)  # 增加到60秒，给更多时间查看
+        
+        return cookie_value
         
     except Exception as e:
         logging.error(f"Error during login process: {str(e)}")
