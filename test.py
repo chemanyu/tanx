@@ -276,29 +276,6 @@ def login_and_fetch_cookie():
                     break
                 except Exception as e1:
                     logging.warning(f"Direct click failed: {str(e1)}")
-                    
-                    try:
-                        # 方法2: JavaScript点击
-                        driver.execute_script("arguments[0].click();", button)
-                        button_clicked = True
-                        logging.info("JavaScript click on login button successful")
-                        break
-                    except Exception as e2:
-                        logging.warning(f"JavaScript click failed: {str(e2)}")
-                        
-                        try:
-                            # 方法3: ActionChains点击
-                            actions = ActionChains(driver)
-                            actions.move_to_element(button)
-                            actions.click()
-                            actions.perform()
-                            button_clicked = True
-                            logging.info("ActionChains click on login button successful")
-                            break
-                        except Exception as e3:
-                            logging.warning(f"ActionChains click failed: {str(e3)}")
-                            continue
-                            
             except Exception as e:
                 logging.warning(f"Failed to locate/interact with login button using {by}: {locator}. Error: {str(e)}")
                 continue
@@ -308,49 +285,46 @@ def login_and_fetch_cookie():
             raise Exception("Could not click login button")
             
         # 等待登录结果
-        time.sleep(5)  # 给登录过程足够时间
+        time.sleep(10)  # 给登录过程足够时间
         
         # 检查登录结果
-        try:
-            # 检查是否仍在登录页面
-            if "login" in driver.current_url.lower():
-                logging.error("Login failed - still on login page")
-                raise Exception("Login failed - still on login page")
+        # try:
+        #     # 检查是否仍在登录页面
+        #     if "login" in driver.current_url.lower():
+        #         logging.error("Login failed - still on login page")
+        #         raise Exception("Login failed - still on login page")
                 
-            # 尝试定位登录后才会出现的元素
-            wait.until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, ".user-info, .dashboard"))
-            )
-            logging.info("Login successful - found post-login elements")
+        #     # 尝试定位登录后才会出现的元
             
-        except Exception as e:
-            logging.error(f"Login verification failed: {str(e)}")
-            raise Exception("Could not verify successful login")
+        # except Exception as e:
+        #     logging.error(f"Login verification failed: {str(e)}")
+        #     raise Exception("Could not verify successful login")
         
         # 切换回主文档并获取cookies
-        driver.switch_to.default_content()
+        # driver.switch_to.default_content()
         
-        # 验证登录是否成功
-        try:
-            wait.until(EC.url_changes('https://tanx.alimama.com/login'))
-            logging.info("Login successful - URL changed")
-        except:
-            logging.error("Login might have failed - URL didn't change")
+        # # 验证登录是否成功
+        # try:
+        #     wait.until(EC.url_changes('https://tanx.alimama.com/login'))
+        #     logging.info("Login successful - URL changed")
+        # except:
+        #     logging.error("Login might have failed - URL didn't change")
             
         # 获取cookies
         cookies = driver.get_cookies()
         cookie_value = '; '.join([f"{cookie['name']}={cookie['value']}" for cookie in cookies])
         logging.info("Successfully fetched cookies")
+        logging.info(cookie_value)
         
-        return cookie_value
+        #return cookie_value
         
     except Exception as e:
         logging.error(f"Error during login process: {str(e)}")
         return None
         
-    finally:
-        if driver:
-            driver.quit()
+    #finally:
+        # if driver:
+        #     driver.quit()
 
 
 def fetch_and_update_cookie():
