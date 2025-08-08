@@ -31,7 +31,7 @@
             margin-bottom: 8px;
             font-weight: bold;
         }
-        textarea, input[type="text"], button {
+        textarea, input[type="text"], input[type="number"], button {
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
@@ -113,9 +113,71 @@
             document.getElementById('scheduler_status').innerHTML = statusHTML;
         }
 
+        async function loadEmailRecipients() {
+            try {
+                const response = await fetch('/get_email_recipients');
+                const data = await response.json();
+                document.getElementById('email_recipients').value = data.current.join('\n');
+            } catch (error) {
+                console.error('加载邮件收件人列表失败:', error);
+            }
+        }
+
+        async function loadQueryDays() {
+            try {
+                const response = await fetch('/get_query_days');
+                const data = await response.json();
+                document.getElementById('query_days').value = data.current;
+            } catch (error) {
+                console.error('加载查询天数失败:', error);
+            }
+        }
+
+        async function resetEmailRecipients() {
+            const loadingElement = document.getElementById('loading');
+            loadingElement.style.display = 'block';
+
+            try {
+                const response = await fetch('/reset_email_recipients', {
+                    method: 'POST'
+                });
+                const data = await response.text();
+                alert(data);
+                loadEmailRecipients(); // 重新加载邮件列表
+            } catch (error) {
+                alert('重置失败，请稍后重试');
+            } finally {
+                loadingElement.style.display = 'none';
+            }
+        }
+
+        async function resetQueryDays() {
+            const loadingElement = document.getElementById('loading');
+            loadingElement.style.display = 'block';
+
+            try {
+                const response = await fetch('/reset_query_days', {
+                    method: 'POST'
+                });
+                const data = await response.text();
+                alert(data);
+                loadQueryDays(); // 重新加载查询天数
+            } catch (error) {
+                alert('重置失败，请稍后重试');
+            } finally {
+                loadingElement.style.display = 'none';
+            }
+        }
+
         // 定时刷新状态
         setInterval(updateSchedulerStatus, 5000);
         updateSchedulerStatus();
+        
+        // 页面加载时获取邮件收件人列表和查询天数
+        window.onload = function() {
+            loadEmailRecipients();
+            loadQueryDays();
+        };
     </script>
 </head>
 <body>
@@ -143,10 +205,25 @@
             <button type="submit">手动更新</button>
         </form>
 
-        <!-- Selenium Fetch Data Form -->
-        <!-- <form onsubmit="fetchData('/selenium_fetch'); return false;">
-            <button type="submit">Selenium 抓包</button>
-        </form> -->
+        <!-- Email Recipients Management Form -->
+        <form id="update_email_form" onsubmit="fetchData('/update_email_recipients', 'update_email_form'); return false;">
+            <label for="email_recipients">邮件收件人列表（每行一个邮箱地址）：</label>
+            <textarea id="email_recipients" name="email_recipients" rows="4" placeholder="请输入邮箱地址，每行一个" required></textarea>
+            <div style="display: flex; gap: 10px;">
+                <button type="submit" style="flex: 1;">更新邮件列表</button>
+                <button type="button" onclick="resetEmailRecipients()" style="flex: 1; background-color: #6c757d;">重置为默认</button>
+            </div>
+        </form>
+
+        <!-- Query Days Management Form -->
+        <form id="update_query_days_form" onsubmit="fetchData('/update_query_days', 'update_query_days_form'); return false;">
+            <label for="query_days">查询前几天的数据（1-30天）：</label>
+            <input type="number" id="query_days" name="query_days" min="1" max="30" placeholder="请输入天数" required>
+            <div style="display: flex; gap: 10px;">
+                <button type="submit" style="flex: 1;">更新查询天数</button>
+                <button type="button" onclick="resetQueryDays()" style="flex: 1; background-color: #6c757d;">重置为前1天</button>
+            </div>
+        </form>
 
         <!-- Scheduler Status Module -->
         <div id="scheduler_status" class="container">

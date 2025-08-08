@@ -1,7 +1,7 @@
 import requests
 import schedule
 import time
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, jsonify
 from threading import Thread
 import logging
 from selenium import webdriver
@@ -162,13 +162,13 @@ def fetch_data():
             'Cookie': cookie_value,
             'Content-Type': 'application/json'
         }
-        # Use yesterday's date as default
-        yesterday = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
-        print(f"Fetching yesterday at {yesterday}")
+        # Use configurable days back instead of fixed yesterday
+        query_date = (datetime.now() - timedelta(days=query_days_back)).strftime('%Y-%m-%d')
+        print(f"Fetching data for {query_date} (前{query_days_back}天)")
     
         for pid in ad_slots:
             data = {
-                "ds": yesterday,
+                "ds": query_date,
                 "mediaClick": "1",
                 "mediaCost": "1",
                 "mediaPV": "1",
@@ -185,8 +185,8 @@ def fetch_data():
                 tanx_monitor_param_list = response_data.get("data", {}).get("clickMonitorParamList", [])
                 # 修改条件判断，检查列表是否为空
                 if len(tanx_monitor_param_list) == 0:
-                    logging.error(f"No data found for pid {pid} on {yesterday}")
-                    print(f"No data found for pid {pid} on {yesterday}")
+                    logging.error(f"No data found for pid {pid} on {query_date}")
+                    print(f"No data found for pid {pid} on {query_date}")
                     continue
                 # 将 activeRatioDf 转换为百分数格式
                 for item in tanx_monitor_param_list:
@@ -265,8 +265,13 @@ def query_and_export_data():
         logging.error(f"Error querying or exporting data: {e}")
 
 # Global variable to store email recipients
-email_recipients = ['chemanyu@admate.cn','zhangwenjing@admate.cn','xuzhongwang@admate.cn','fanang@admate.cn']
+default_email_recipients = ['chemanyu@admate.cn','zhangwenjing@admate.cn','xuzhongwang@admate.cn','fanang@admate.cn']
+email_recipients = default_email_recipients.copy()
 #email_recipients = ['chemanyu@admate.cn']
+
+# Global variable to store query days back
+default_days_back = 1
+query_days_back = default_days_back
 
 def send_email(file_path):
     try:
@@ -315,6 +320,90 @@ def update_cookie_task():
     else:
         logging.error("自动更新Cookie失败")
 
+
+@app.route('/get_email_recipients', methods=['GET'])
+def get_email_recipients():
+    return jsonify({
+        'current': email_recipients,
+        'default': default_email_recipients
+    })
+
+@app.route('/update_email_recipients', methods=['POST'])
+def update_email_recipients():
+    global email_recipients
+    try:
+        # 获取提交的邮件列表，按行分割并过滤空行
+        email_text = request.form.get('email_recipients', '')
+        new_emails = [email.strip() for email in email_text.split('\n') if email.strip()]
+        
+        # 去重并过滤有效邮箱
+        valid_emails = []
+        for email in new_emails:
+            if '@' in email and '.' in email:  # 简单的邮箱格式验证
+                if email not in valid_emails:  # 去重
+                    valid_emails.append(email)
+        
+        if valid_emails:
+            email_recipients = valid_emails
+            logging.info(f"邮件收件人列表已更新: {email_recipients}")
+            return "邮件收件人列表已更新成功！"
+        else:
+            return "错误：请输入至少一个有效的邮箱地址！", 400
+            
+    except Exception as e:
+        logging.error(f"更新邮件收件人列表失败: {e}")
+        return f"更新失败: {str(e)}", 500
+
+@app.route('/reset_email_recipients', methods=['POST'])
+def reset_email_recipients():
+    global email_recipients
+    try:
+        email_recipients = default_email_recipients.copy()
+        logging.info(f"邮件收件人列表已重置为默认值: {email_recipients}")
+        return "邮件收件人列表已重置为默认值！"
+    except Exception as e:
+        logging.error(f"重置邮件收件人列表失败: {e}")
+        return f"重置失败: {str(e)}", 500
+
+
+@app.route('/get_query_days', methods=['GET'])
+def get_query_days():
+    return jsonify({
+        'current': query_days_back,
+        'default': default_days_back
+    })
+
+@app.route('/update_query_days', methods=['POST'])
+def update_query_days():
+    global query_days_back
+    try:
+        days = request.form.get('query_days', '')
+        if not days.isdigit():
+            return "错误：请输入有效的数字！", 400
+        
+        days_int = int(days)
+        if days_int < 1 or days_int > 30:  # 限制查询范围
+            return "错误：查询天数必须在1-30天之间！", 400
+        
+        query_days_back = days_int
+        logging.info(f"查询天数已更新为前{query_days_back}天")
+        return f"查询天数已更新为前{query_days_back}天！"
+        
+    except Exception as e:
+        logging.error(f"更新查询天数失败: {e}")
+        return f"更新失败: {str(e)}", 500
+
+@app.route('/reset_query_days', methods=['POST'])
+def reset_query_days():
+    global query_days_back
+    try:
+        query_days_back = default_days_back
+        logging.info(f"查询天数已重置为前{query_days_back}天")
+        return f"查询天数已重置为前{query_days_back}天！"
+    except Exception as e:
+        logging.error(f"重置查询天数失败: {e}")
+        return f"重置失败: {str(e)}", 500
+    
 
 # 设置定时任务
 schedule.every().day.at("12:15").do(fetch_data)  # 每天抓取数据
