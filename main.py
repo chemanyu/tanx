@@ -252,33 +252,47 @@ def extract_media(adzone_name):
     return '其他'
 
 def add_media_statistics(df):
-    df['媒体'] = df['广告位名称'].apply(extract_media)
+    # 临时添加媒体列用于分组，但不包含在最终结果中
+    df_temp = df.copy()
+    df_temp['媒体'] = df_temp['广告位名称'].apply(extract_media)
     result_rows = []
-    for media, group in df.groupby('媒体'):
-        for _, row in group.iterrows():
-            result_rows.append(row.to_dict())  # 转换为字典
-        # 统计行 - 确保所有值都是Python原生类型
-        stats_row = {
-            '日期': group['日期'].iloc[0],
-            '广告位': '统计总数',
-            '广告位名称': '',
-            'tanx有效请求': int(group['tanx有效请求'].apply(pd.to_numeric, errors='coerce').sum()),
-            '东风手淘换端率-同步点击': f"{group['东风手淘换端率-同步点击'].apply(lambda x: float(str(x).replace('%','')) if '%' in str(x) and str(x).replace('%','').replace('.','',1).isdigit() else None).mean():.2f}%",
-            'TANX曝光数': int(group['TANX曝光数'].apply(pd.to_numeric, errors='coerce').sum()),
-            'TANX点击数': int(group['TANX点击数'].apply(pd.to_numeric, errors='coerce').sum()),
-            'TANX预估收益': float(group['TANX预估收益'].apply(pd.to_numeric, errors='coerce').sum()),
-            '媒体': str(media)
-        }
-        logging.info(f"Media: {media}, Stats: {stats_row}")
-        result_rows.append(stats_row)
-        # 空行分隔
+    
+    # 按日期和媒体分组
+    for date in df_temp['日期'].unique():
+        date_df = df_temp[df_temp['日期'] == date]
+        
+        for media in date_df['媒体'].unique():
+            media_date_df = date_df[date_df['媒体'] == media]
+            
+            # 添加该媒体当天的所有数据行（不包含媒体列）
+            for _, row in media_date_df.iterrows():
+                row_dict = row.to_dict()
+                # 删除媒体列
+                if '媒体' in row_dict:
+                    del row_dict['媒体']
+                result_rows.append(row_dict)
+            
+            # 添加该媒体当天的统计行
+            stats_row = {
+                '日期': date,
+                '广告位': '统计总数',
+                '广告位名称': f'{media}',
+                'tanx有效请求': int(media_date_df['tanx有效请求'].apply(pd.to_numeric, errors='coerce').sum()),
+                '东风手淘换端率-同步点击': f"{media_date_df['东风手淘换端率-同步点击'].apply(lambda x: float(str(x).replace('%','')) if '%' in str(x) and str(x).replace('%','').replace('.','',1).isdigit() else None).mean():.2f}%",
+                'TANX曝光数': int(media_date_df['TANX曝光数'].apply(pd.to_numeric, errors='coerce').sum()),
+                'TANX点击数': int(media_date_df['TANX点击数'].apply(pd.to_numeric, errors='coerce').sum()),
+                'TANX预估收益': float(media_date_df['TANX预估收益'].apply(pd.to_numeric, errors='coerce').sum())
+            }
+            logging.info(f"Date: {date}, Media: {media}, Stats: {stats_row}")
+            result_rows.append(stats_row)
+            
+        # 每天结束后添加空行分隔（不包含媒体列）
         empty_row = {col: '' for col in df.columns}
         result_rows.append(empty_row)
 
-    logging.info(f"Intermediate DataFrame with empty rows:\n{pd.DataFrame(result_rows)}")
+    logging.info(f"Final DataFrame with daily statistics:\n{pd.DataFrame(result_rows)}")
     result_df = pd.DataFrame(result_rows)
-    logging.info(f"Final DataFrame with statistics:\n{result_df}")
-    return result_df[df.columns]  # 保持原有列顺序
+    return result_df[df.columns]  # 保持原有列顺序（不包含媒体列）
 
 def query_and_export_data():
     try:
