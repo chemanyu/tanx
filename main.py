@@ -21,6 +21,13 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 from cookie import login_and_fetch_cookie  # 从cookie.py导入方法
+try:
+    from openpyxl import load_workbook
+    from openpyxl.utils.dataframe import dataframe_to_rows
+    OPENPYXL_AVAILABLE = True
+except ImportError:
+    OPENPYXL_AVAILABLE = False
+    logging.warning("openpyxl not available, Excel formatting will be limited")
 
 CHROME_DRIVER_PATH = "/opt/homebrew/bin/chromedriver" #
 
@@ -236,6 +243,43 @@ scheduler_status = deque(maxlen=10)  # 存储最近十次的执行记录
 def get_scheduler_status():
     return list(scheduler_status)
 
+def extract_media(adzone_name):
+    if pd.isna(adzone_name):
+        return '未知'
+    for key in ['佳投', '有境', '新数', '快友', '多盟', '浩睿', '美数']:
+        if key in str(adzone_name):
+            return key
+    return '其他'
+
+def add_media_statistics(df):
+    df['媒体'] = df['广告位名称'].apply(extract_media)
+    result_rows = []
+    for media, group in df.groupby('媒体'):
+        for _, row in group.iterrows():
+            result_rows.append(row.to_dict())  # 转换为字典
+        # 统计行 - 确保所有值都是Python原生类型
+        stats_row = {
+            '日期': group['日期'].iloc[0],
+            '广告位': '统计总数',
+            '广告位名称': '',
+            'tanx有效请求': int(group['tanx有效请求'].apply(pd.to_numeric, errors='coerce').sum()),
+            '东风手淘换端率-同步点击': f"{group['东风手淘换端率-同步点击'].apply(lambda x: float(str(x).replace('%','')) if '%' in str(x) and str(x).replace('%','').replace('.','',1).isdigit() else None).mean():.2f}%",
+            'TANX曝光数': int(group['TANX曝光数'].apply(pd.to_numeric, errors='coerce').sum()),
+            'TANX点击数': int(group['TANX点击数'].apply(pd.to_numeric, errors='coerce').sum()),
+            'TANX预估收益': float(group['TANX预估收益'].apply(pd.to_numeric, errors='coerce').sum()),
+            '媒体': str(media)
+        }
+        logging.info(f"Media: {media}, Stats: {stats_row}")
+        result_rows.append(stats_row)
+        # 空行分隔
+        empty_row = {col: '' for col in df.columns}
+        result_rows.append(empty_row)
+
+    logging.info(f"Intermediate DataFrame with empty rows:\n{pd.DataFrame(result_rows)}")
+    result_df = pd.DataFrame(result_rows)
+    logging.info(f"Final DataFrame with statistics:\n{result_df}")
+    return result_df[df.columns]  # 保持原有列顺序
+
 def query_and_export_data():
     try:
         # Query the database for the last 30 days of data
@@ -252,10 +296,15 @@ def query_and_export_data():
         # Convert the result to a pandas DataFrame
         columns = ['日期', '广告位', '广告位名称', 'tanx有效请求', '东风手淘换端率-同步点击', 'TANX曝光数', 'TANX点击数', 'TANX预估收益']
         df = pd.DataFrame(result, columns=columns)
+        df = add_media_statistics(df)
 
         # Export the DataFrame to an Excel file
         file_path = '/tmp/tanx_data.xlsx'
         df.to_excel(file_path, index=False)
+        
+        # 调整Excel列宽
+        adjust_excel_column_width(file_path)
+        
         logging.info(f"Data exported to {file_path}")
 
         # Send the Excel file via email
@@ -264,10 +313,62 @@ def query_and_export_data():
     except Exception as e:
         logging.error(f"Error querying or exporting data: {e}")
 
+def adjust_excel_column_width(file_path):
+    """调整Excel列宽，使表格更易读"""
+    try:
+        if not OPENPYXL_AVAILABLE:
+            logging.warning("openpyxl not available, skipping column width adjustment")
+            return
+            
+        # 加载工作簿
+        wb = load_workbook(file_path)
+        ws = wb.active
+        
+        # 定义每列的最小宽度
+        column_widths = {
+            'A': 12,  # 日期
+            'B': 25,  # 广告位
+            'C': 30,  # 广告位名称
+            'D': 15,  # tanx有效请求
+            'E': 25,  # 东风手淘换端率-同步点击
+            'F': 15,  # TANX曝光数
+            'G': 15,  # TANX点击数
+            'H': 15,  # TANX预估收益
+        }
+        
+        # 设置列宽
+        for col_letter, width in column_widths.items():
+            ws.column_dimensions[col_letter].width = width
+        
+        # 自动调整列宽（基于内容）
+        for column in ws.columns:
+            max_length = 0
+            column_letter = column[0].column_letter
+            
+            for cell in column:
+                try:
+                    if len(str(cell.value)) > max_length:
+                        max_length = len(str(cell.value))
+                except:
+                    pass
+            
+            # 设置调整后的宽度，但不超过50个字符
+            adjusted_width = min(max_length + 2, 50)
+            # 确保不小于预设的最小宽度
+            final_width = max(adjusted_width, column_widths.get(column_letter, 10))
+            ws.column_dimensions[column_letter].width = final_width
+        
+        # 保存文件
+        wb.save(file_path)
+        logging.info("Excel列宽调整完成")
+        
+    except Exception as e:
+        logging.error(f"调整Excel列宽失败: {e}")
+
 # Global variable to store email recipients
 default_email_recipients = ['chemanyu@admate.cn','zhangwenjing@admate.cn','xuzhongwang@admate.cn','fanang@admate.cn']
 email_recipients = default_email_recipients.copy()
-#email_recipients = ['chemanyu@admate.cn']
+
 
 # Global variable to store query days back
 default_days_back = 1
