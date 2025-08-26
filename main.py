@@ -236,7 +236,7 @@ def fetch_data():
 
 @app.route('/fetch_data', methods=['POST'])
 def fetch_data_button():
-    #fetch_data()
+    fetch_data()
     query_and_export_data()
     return "抓包调用成功！"
 
@@ -426,8 +426,8 @@ def adjust_excel_column_width(file_path):
         logging.error(f"调整Excel列宽失败: {e}")
 
 # Global variable to store email recipients
-#default_email_recipients = ['chemanyu@admate.cn','zhangwenjing@admate.cn','xuzhongwang@admate.cn','fanang@admate.cn']
-default_email_recipients = ['chemanyu@admate.cn', 'fanang@admate.cn']
+default_email_recipients = ['chemanyu@admate.cn','zhangwenjing@admate.cn','xuzhongwang@admate.cn','fanang@admate.cn']
+#default_email_recipients = ['chemanyu@admate.cn', 'fanang@admate.cn']
 email_recipients = default_email_recipients.copy()
 
 
