@@ -82,10 +82,18 @@ ad_slots = [
 ad_slots_up = []
 
 # MySQL database configuration
+# DB_CONFIG = {
+#     'host': '172.16.3.12',
+#     'user': 'adx',
+#     'password': 'CaPn1jxidkkE5',
+#     'database': 'release_atd',
+#     'charset': 'utf8mb4'
+# }
+
 DB_CONFIG = {
-    'host': '172.16.3.12',
-    'user': 'adx',
-    'password': 'CaPn1jxidkkE5',
+    'host': '127.0.0.1',
+    'user': 'root',
+    'password': '123456',
     'database': 'release_atd',
     'charset': 'utf8mb4'
 }
