@@ -228,12 +228,12 @@ def fetch_data():
 
 @app.route('/fetch_data', methods=['POST'])
 def fetch_data_button():
-    fetch_data()
+    #fetch_data()
     query_and_export_data()
     return "抓包调用成功！"
 
 def run_flask():
-    app.run(port=5000)
+    app.run(port=5003)
 
 
 # 全局变量存储定时任务状态
@@ -294,6 +294,24 @@ def add_media_statistics(df):
     result_df = pd.DataFrame(result_rows)
     return result_df[df.columns]  # 保持原有列顺序（不包含媒体列）
 
+def create_summary_sheet(df_with_stats):
+    """从详细数据中提取所有统计汇总行创建汇总表"""
+    # 筛选出所有统计汇总行（广告位为"统计总数"的行）
+    summary_rows = df_with_stats[df_with_stats['广告位'] == '统计总数'].copy()
+    
+    logging.info(f"Found {len(summary_rows)} summary rows from detailed data")
+    logging.info(f"Summary rows shape: {summary_rows.shape}")
+    
+    if summary_rows.empty:
+        logging.warning("No summary rows found in detailed data")
+        return pd.DataFrame()
+    
+    # 重置索引
+    summary_rows.reset_index(drop=True, inplace=True)
+    
+    logging.info(f"Created summary sheet with {len(summary_rows)} rows")
+    return summary_rows
+
 def query_and_export_data():
     try:
         # Query the database for the last 30 days of data
@@ -310,16 +328,32 @@ def query_and_export_data():
         # Convert the result to a pandas DataFrame
         columns = ['日期', '广告位', '广告位名称', 'tanx有效请求', '东风手淘换端率-同步点击', 'TANX曝光数', 'TANX点击数', 'TANX预估收益']
         df = pd.DataFrame(result, columns=columns)
-        df = add_media_statistics(df)
-
-        # Export the DataFrame to an Excel file
-        file_path = '/tmp/tanx_data.xlsx'
-        df.to_excel(file_path, index=False)
         
-        # 调整Excel列宽
+        # 添加媒体统计到原始数据
+        df_with_stats = add_media_statistics(df)
+        
+        # 从详细数据中提取汇总行创建汇总表
+        summary_df = create_summary_sheet(df_with_stats)
+        logging.info(f"Summary DataFrame shape: {summary_df.shape}")
+        logging.info(f"Summary DataFrame empty: {summary_df.empty}")
+
+        # Export to Excel with multiple sheets
+        file_path = '/tmp/tanx_data.xlsx'
+        with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
+            # 写入详细数据到第一个sheet
+            df_with_stats.to_excel(writer, sheet_name='详细数据', index=False)
+            
+            # 写入汇总数据到第二个sheet
+            if not summary_df.empty:
+                summary_df.to_excel(writer, sheet_name='汇总统计', index=False)
+                logging.info("Summary sheet created successfully")
+            else:
+                logging.warning("Summary sheet not created - no summary data found")
+        
+        # 调整Excel列宽（对两个sheet都进行调整）
         adjust_excel_column_width(file_path)
         
-        logging.info(f"Data exported to {file_path}")
+        logging.info(f"Data exported to {file_path} with detailed data and summary statistics")
 
         # Send the Excel file via email
         send_email(file_path)
@@ -336,7 +370,6 @@ def adjust_excel_column_width(file_path):
             
         # 加载工作簿
         wb = load_workbook(file_path)
-        ws = wb.active
         
         # 定义每列的最小宽度
         column_widths = {
@@ -350,37 +383,42 @@ def adjust_excel_column_width(file_path):
             'H': 15,  # TANX预估收益
         }
         
-        # 设置列宽
-        for col_letter, width in column_widths.items():
-            ws.column_dimensions[col_letter].width = width
-        
-        # 自动调整列宽（基于内容）
-        for column in ws.columns:
-            max_length = 0
-            column_letter = column[0].column_letter
+        # 对所有工作表进行列宽调整
+        for sheet_name in wb.sheetnames:
+            ws = wb[sheet_name]
             
-            for cell in column:
-                try:
-                    if len(str(cell.value)) > max_length:
-                        max_length = len(str(cell.value))
-                except:
-                    pass
+            # 设置列宽
+            for col_letter, width in column_widths.items():
+                ws.column_dimensions[col_letter].width = width
             
-            # 设置调整后的宽度，但不超过50个字符
-            adjusted_width = min(max_length + 2, 50)
-            # 确保不小于预设的最小宽度
-            final_width = max(adjusted_width, column_widths.get(column_letter, 10))
-            ws.column_dimensions[column_letter].width = final_width
+            # 自动调整列宽（基于内容）
+            for column in ws.columns:
+                max_length = 0
+                column_letter = column[0].column_letter
+                
+                for cell in column:
+                    try:
+                        if len(str(cell.value)) > max_length:
+                            max_length = len(str(cell.value))
+                    except:
+                        pass
+                
+                # 设置调整后的宽度，但不超过50个字符
+                adjusted_width = min(max_length + 2, 50)
+                # 确保不小于预设的最小宽度
+                final_width = max(adjusted_width, column_widths.get(column_letter, 10))
+                ws.column_dimensions[column_letter].width = final_width
         
         # 保存文件
         wb.save(file_path)
-        logging.info("Excel列宽调整完成")
+        logging.info("Excel列宽调整完成（所有工作表）")
         
     except Exception as e:
         logging.error(f"调整Excel列宽失败: {e}")
 
 # Global variable to store email recipients
-default_email_recipients = ['chemanyu@admate.cn','zhangwenjing@admate.cn','xuzhongwang@admate.cn','fanang@admate.cn']
+#default_email_recipients = ['chemanyu@admate.cn','zhangwenjing@admate.cn','xuzhongwang@admate.cn','fanang@admate.cn']
+default_email_recipients = ['chemanyu@admate.cn', 'fanang@admate.cn']
 email_recipients = default_email_recipients.copy()
 
 
