@@ -346,7 +346,8 @@ def query_and_export_data():
         logging.info(f"Summary DataFrame empty: {summary_df.empty}")
 
         # Export to Excel with multiple sheets
-        file_path = '/tmp/tanx_data.xlsx'
+        #file_path = '/tmp/tanx_data.xlsx'
+        file_path = 'D:\\tanx\\tanx_data.xlsx'
         with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
             # 写入详细数据到第一个sheet
             df_with_stats.to_excel(writer, sheet_name='详细数据', index=False)
