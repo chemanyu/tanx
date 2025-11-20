@@ -9,6 +9,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver import ActionChains
 
+CHROME_DRIVER_PATH = "D:\\142\\chromedriver-win64\\chromedriver.exe" # <-- Windows 路径示例
+
+
 def login_and_fetch_cookie():
     """
     Automates login to Alimama (阿里妈妈) platform and returns cookies.
@@ -52,8 +55,10 @@ def login_and_fetch_cookie():
         ]
         options.add_argument(f'user-agent={random.choice(user_agents)}')
         
-        service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=options)
+        # service = Service(ChromeDriverManager().install())
+        # driver = webdriver.Chrome(service=service, options=options)
+        service = Service(CHROME_DRIVER_PATH)
+        driver = webdriver.Chrome(service=service, options=options)  # 用 seleniumwire 的 webdriver
         
         # 设置窗口大小和位置
         driver.set_window_size(1200, 800)
