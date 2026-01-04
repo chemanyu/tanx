@@ -236,7 +236,7 @@ def fetch_data():
 
 @app.route('/fetch_data', methods=['POST'])
 def fetch_data_button():
-    #fetch_data()
+    fetch_data()
     query_and_export_data()
     return "抓包调用成功！"
 
