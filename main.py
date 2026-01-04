@@ -267,6 +267,7 @@ def add_media_statistics(df):
     
     # 按日期和媒体分组
     for date in df_temp['日期'].unique():
+        formatted_date = pd.to_datetime(str(date), format='%Y%m%d').strftime('%Y/%m/%d')
         date_df = df_temp[df_temp['日期'] == date]
         
         for media in date_df['媒体'].unique():
@@ -282,7 +283,7 @@ def add_media_statistics(df):
             
             # 添加该媒体当天的统计行
             stats_row = {
-                '日期': date,
+                '日期': formatted_date,
                 '广告位': '统计总数',
                 '广告位名称': f'{media}',
                 'tanx有效请求': int(media_date_df['tanx有效请求'].apply(pd.to_numeric, errors='coerce').sum()),
