@@ -236,7 +236,7 @@ def fetch_data():
 
 @app.route('/fetch_data', methods=['POST'])
 def fetch_data_button():
-    fetch_data()
+    #fetch_data()
     query_and_export_data()
     return "抓包调用成功！"
 
@@ -279,6 +279,8 @@ def add_media_statistics(df):
                 # 删除媒体列
                 if '媒体' in row_dict:
                     del row_dict['媒体']
+                if '日期' in row_dict:
+                    row_dict['日期'] = formatted_date
                 result_rows.append(row_dict)
             
             # 添加该媒体当天的统计行
