@@ -1,5 +1,5 @@
 // 定时任务：每30分钟自动更新一次cookie
-const UPDATE_INTERVAL = 1; // 分钟
+const UPDATE_INTERVAL = 30; // 分钟
 
 // 监听定时器触发
 chrome.alarms.onAlarm.addListener((alarm) => {
