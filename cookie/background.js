@@ -1,10 +1,5 @@
 // 定时任务：每30分钟自动更新一次cookie
-const UPDATE_INTERVAL = 30; // 分钟
-
-// 创建定时器
-chrome.alarms.create('updateCookie', {
-  periodInMinutes: UPDATE_INTERVAL
-});
+const UPDATE_INTERVAL = 1; // 分钟
 
 // 监听定时器触发
 chrome.alarms.onAlarm.addListener((alarm) => {
@@ -14,10 +9,27 @@ chrome.alarms.onAlarm.addListener((alarm) => {
   }
 });
 
-// 扩展安装或更新时，立即执行一次
+// 扩展安装或更新时，创建定时器并立即执行一次
 chrome.runtime.onInstalled.addListener(() => {
-  console.log('Chrome扩展已安装/更新，立即执行一次Cookie更新');
+  console.log('Chrome扩展已安装/更新');
+  
+  // 创建定时器（每30分钟执行一次）
+  chrome.alarms.create('updateCookie', {
+    periodInMinutes: UPDATE_INTERVAL
+  });
+  
+  console.log('定时器已创建，立即执行一次Cookie更新');
   updateCookieAutomatically();
+});
+
+// 扩展启动时，确保定时器存在
+chrome.runtime.onStartup.addListener(() => {
+  console.log('Chrome扩展启动');
+  
+  // 确保定时器存在
+  chrome.alarms.create('updateCookie', {
+    periodInMinutes: UPDATE_INTERVAL
+  });
 });
 
 // 自动更新Cookie的函数
