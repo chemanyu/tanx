@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Z方Cookie更新",
+  "version": "1.0",
+  "description": "用于更新京东联盟在Z方侧的Cookie",
+  "permissions": [
+    "cookies",
+    "activeTab",
+    "alarms",
+    "notifications",
+    "tabs"
+  ],
+  "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "更新Cookie"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

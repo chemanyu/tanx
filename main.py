@@ -152,8 +152,19 @@ def cookie_input_page():
 @app.route('/update_cookie', methods=['POST'])
 def update_cookie():
     global cookie_value
-    cookie_value = request.form['cookie']
-    return "Cookie 已更新成功！"
+    try:
+        new_cookie = request.form.get('cookie', '')
+        if not new_cookie:
+            logging.warning("收到空的Cookie更新请求")
+            return "错误：Cookie不能为空！", 400
+        
+        cookie_value = new_cookie
+        update_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        logging.info(f"Cookie已更新 - 更新时间: {update_time}, Cookie长度: {len(cookie_value)}")
+        return f"Cookie 已更新成功！更新时间: {update_time}"
+    except Exception as e:
+        logging.error(f"更新Cookie失败: {e}")
+        return f"更新Cookie失败: {str(e)}", 500
 
 
 @app.route('/update_ad_slots', methods=['POST'])
