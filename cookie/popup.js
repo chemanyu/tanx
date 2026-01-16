@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData();
         formData.append('cookie', cookieString);
         
-        fetch('http://127.0.0.1:5000/update_cookie', {
+        fetch('http://127.0.0.1:5003/update_cookie', {
           method: 'POST',
           body: formData
         })
