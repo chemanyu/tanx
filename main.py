@@ -207,7 +207,7 @@ def fetch_data():
                 response_data = response.json()
                 if response_data.get("info", {}).get("errorCode") == "user_not_login":
                     logging.info("User not logged in, please update cookie.")
-                    update_cookie_task()  # 自动更新cookie
+                    #update_cookie_task()  # 自动更新cookie
                 tanx_monitor_param_list = response_data.get("data", {}).get("clickMonitorParamList", [])
                 # 修改条件判断，检查列表是否为空
                 if len(tanx_monitor_param_list) == 0:
